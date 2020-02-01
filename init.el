@@ -20,7 +20,9 @@
         monokai-theme
         lispy
         multiple-cursors
-        easy-kill))
+        easy-kill
+        yasnippet
+        company-posframe))
 
 (package-initialize)
 
@@ -132,6 +134,8 @@
 (define-key global-map (kbd "C-x C-a") 'counsel-projectile-ag)
 
 (define-key global-map (kbd "C-p") 'counsel-projectile-find-file)
+;; 关闭所有buffer: 针对project来的
+(define-key global-map (kbd "C-c C-q") 'projectile-kill-buffers)
 
 ;; M-> & M-< 跳到最后;;*
 (global-set-key (kbd "C-c m") 'end-of-buffer)
@@ -142,6 +146,9 @@
 
 ;; C-x C-v
 (global-set-key (kbd "C-c k") 'find-alternate-file)
+
+(global-set-key (kbd "C-s") 'swiper)
+
 
 ;; M-w w 复制一个单词 和表达式
 (global-set-key (kbd "M-w") 'easy-kill)
@@ -155,3 +162,31 @@
 ;; c克隆
 (add-hook 'emacs-lisp-mode-hook 'lispy-mode)
 (add-hook 'clojure-mode-hook 'lispy-mode)
+
+;; 用 `emacs --daemon` => `emacsclient -c`
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+
+(setq-default cider-default-cljs-repl 'shadow)
+(setq cider-offer-to-open-cljs-app-in-browser nil)
+
+(setq cider-prompt-for-symbol nil)
+
+(define-key company-mode-map (kbd "<tab>") 'company-complete-common)
+(define-key company-mode-map (kbd "TAB") 'company-complete-common)
+;; 补全列表的中文错位问题
+(company-posframe-mode 1)
+
+;; C-c C-c执行顶级表达式:忽略掉(comment (+ 1 2))
+(setq clojure-toplevel-inside-comment-form t)
+
+;; 去掉强化的js补全,会导致很卡
+(setq cider-enhanced-cljs-completion-p nil)
+
+;; C-2出来用法注释
+(defun user/clojure-hide-comment (&rest args)
+  (save-mark-and-excursion 
+   (while (search-forward "(comment" nil t)
+     (hs-hide-block))))
+(add-hook 'clojure-mode-hook 'user/clojure-hide-comment)
