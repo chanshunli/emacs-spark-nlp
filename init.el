@@ -13,9 +13,11 @@
 	smartparens
 	projectile
 	company
+    ag
 	;;helm-projectile
 	counsel-projectile
-	monokai-theme))
+	monokai-theme
+    lispy))
 
 (package-initialize)
 
@@ -42,8 +44,6 @@
 ;;(require 'helm-config)
 
 ;;(helm-projectile-on)
-
-;;(define-key global-map (kbd "C-p") 'helm-projectile-find-file)
 
 ;; global:
 ;; Better Defaults
@@ -116,3 +116,23 @@
 ;; Actually we don't need custom file, this file can be generated
 ;; accidentally, so we add this file to .gitignore and never load it.
 (setq custom-file "~/.emacs.d/custom.el")
+
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+
+(projectile-global-mode 1)
+
+;; steve
+(define-key global-map (kbd "C-x C-o") 'counsel-projectile-switch-project)
+
+(define-key global-map (kbd "C-x C-a") 'counsel-projectile-ag)
+
+(define-key global-map (kbd "C-p") 'counsel-projectile-find-file)
+
+;; M-> & M-< 跳到最后
+;;(global-set-key (kbd "C-c m") 'end-of-buffer)
+(global-set-key (kbd "M-g") 'goto-line)
+
+;; 运行上一条执行的命令
+(global-set-key (kbd "M-p") 'ivy-resume)
