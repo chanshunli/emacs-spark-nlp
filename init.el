@@ -19,7 +19,8 @@
         counsel-projectile
         monokai-theme
         lispy
-        multiple-cursors))
+        multiple-cursors
+        easy-kill))
 
 (package-initialize)
 
@@ -141,6 +142,9 @@
 
 ;; C-x C-v
 (global-set-key (kbd "C-c k") 'find-alternate-file)
+
+;; M-w w 复制一个单词 和表达式
+(global-set-key (kbd "M-w") 'easy-kill)
 
 ;; 多光标编辑: C-@选中 => C-> 下一个 ... => 回车退出
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
