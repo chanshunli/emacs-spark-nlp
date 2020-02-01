@@ -5,19 +5,21 @@
         ("melpa" . "http://elpa.emacs-china.org/melpa/")
         ("melpa-stable" . "http://elpa.emacs-china.org/melpa-stable/")))
 
+;;helm
+;;helm-projectile
+;; M 是格式化多行, O变成一行, m选中表达式
 (setq package-selected-packages
-      '(;;helm
-	ivy
-	cider
-	clojure-mode
-	smartparens
-	projectile
-	company
-    ag
-	;;helm-projectile
-	counsel-projectile
-	monokai-theme
-    lispy))
+      '(ivy
+        cider
+        clojure-mode
+        smartparens
+        projectile
+        company
+        ag
+        counsel-projectile
+        monokai-theme
+        lispy
+        multiple-cursors))
 
 (package-initialize)
 
@@ -131,8 +133,17 @@
 (define-key global-map (kbd "C-p") 'counsel-projectile-find-file)
 
 ;; M-> & M-< 跳到最后
-;;(global-set-key (kbd "C-c m") 'end-of-buffer)
+(global-set-key (kbd "C-c m") 'end-of-buffer)
 (global-set-key (kbd "M-g") 'goto-line)
 
 ;; 运行上一条执行的命令
 (global-set-key (kbd "M-p") 'ivy-resume)
+
+;; C-x C-v
+(global-set-key (kbd "C-c k") 'find-alternate-file)
+
+;; d 是 %, j下一个表达式 k上一个表达式, e是执行
+;; s和w可以交换表达式, 大于号吞表达式,小于号吐出来表达式
+;; c克隆
+(add-hook 'emacs-lisp-mode-hook 'lispy-mode)
+(add-hook 'clojure-mode-hook 'lispy-mode)
