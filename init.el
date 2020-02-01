@@ -22,7 +22,8 @@
         multiple-cursors
         easy-kill
         yasnippet
-        company-posframe))
+        company-posframe
+        clj-refactor))
 
 (package-initialize)
 
@@ -173,20 +174,35 @@
 
 (setq cider-prompt-for-symbol nil)
 
-(define-key company-mode-map (kbd "<tab>") 'company-complete-common)
-(define-key company-mode-map (kbd "TAB") 'company-complete-common)
+(define-key company-mode-map (kbd "<tab>") 'company-indent-or-complete-common)
+(define-key company-mode-map (kbd "TAB") 'company-indent-or-complete-common)
 ;; 补全列表的中文错位问题
 (company-posframe-mode 1)
-
 ;; C-c C-c执行顶级表达式:忽略掉(comment (+ 1 2))
-(setq clojure-toplevel-inside-comment-form t)
 
-;; 去掉强化的js补全,会导致很卡
-(setq cider-enhanced-cljs-completion-p nil)
+(setq clojure-toplevel-inside-comment-form t)
+;; 去掉强化的js补全,会导致很卡 => t是打开
+(setq cider-enhanced-cljs-completion-p t)
+
+(require 'hideshow)
+(define-key global-map (kbd "C-x C-h") 'hideshow-toggle-hidding)
 
 ;; C-2出来用法注释
 (defun user/clojure-hide-comment (&rest args)
-  (save-mark-and-excursion 
-   (while (search-forward "(comment" nil t)
-     (hs-hide-block))))
+  (save-mark-and-excursion
+    (while (search-forward "(comment" nil t)
+      (hs-hide-block))))
 (add-hook 'clojure-mode-hook 'user/clojure-hide-comment)
+
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+
+
+(defun my-clojure-mode-hook ()
+    (clj-refactor-mode 1)
+    (yas-minor-mode 1) ; for adding require/use/import statements
+    ;; This choice of keybinding leaves cider-macroexpand-1 unbound
+    (cljr-add-keybindings-with-prefix "C-c C-m"))
+
+(add-hook 'clojure-mode-hook #'my-clojure-mode-hook)
+
+;; M-. cider定义跳转, M-, cider定义返回
