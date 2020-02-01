@@ -132,7 +132,7 @@
 
 (define-key global-map (kbd "C-p") 'counsel-projectile-find-file)
 
-;; M-> & M-< 跳到最后
+;; M-> & M-< 跳到最后;;*
 (global-set-key (kbd "C-c m") 'end-of-buffer)
 (global-set-key (kbd "M-g") 'goto-line)
 
@@ -141,6 +141,10 @@
 
 ;; C-x C-v
 (global-set-key (kbd "C-c k") 'find-alternate-file)
+
+;; 多光标编辑: C-@选中 => C-> 下一个 ... => 回车退出
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/skip-to-next-like-this)
 
 ;; d 是 %, j下一个表达式 k上一个表达式, e是执行
 ;; s和w可以交换表达式, 大于号吞表达式,小于号吐出来表达式
