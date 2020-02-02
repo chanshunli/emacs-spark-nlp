@@ -25,7 +25,8 @@
         company-posframe
         clj-refactor
         magit
-        neotree))
+        neotree
+        multi-term))
 
 (package-initialize)
 
@@ -212,3 +213,8 @@
 ;; M-x magit-status => TODO: d 是 diff, a是add, c是checkout, #  按下修改的文件就会打印出来
 
 (global-set-key [f8] 'neotree-toggle)
+
+;; 在Emacs启动的mutil-term是zsh # 在外面终端启动的是closh
+(defun zsh ()
+  (interactive)
+  (multi-term))
