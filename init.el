@@ -23,7 +23,8 @@
         easy-kill
         yasnippet
         company-posframe
-        clj-refactor))
+        clj-refactor
+        magit))
 
 (package-initialize)
 
@@ -146,7 +147,7 @@
 (global-set-key (kbd "M-p") 'ivy-resume)
 
 ;; C-x C-v
-(global-set-key (kbd "C-c k") 'find-alternate-file)
+(global-set-key (kbd "C-c k") 'find-alternate-file) ;; C-x k 是kill-buffer
 
 (global-set-key (kbd "C-s") 'swiper)
 
@@ -206,3 +207,5 @@
 (add-hook 'clojure-mode-hook #'my-clojure-mode-hook)
 
 ;; M-. cider定义跳转, M-, cider定义返回
+
+;; M-x magit-status => TODO: d 是 diff, a是add, c是checkout, #  按下修改的文件就会打印出来
