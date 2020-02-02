@@ -26,7 +26,8 @@
         clj-refactor
         magit
         neotree
-        multi-term))
+        multi-term
+        exec-path-from-shell))
 
 (package-initialize)
 
@@ -219,3 +220,6 @@
 (defun zsh ()
   (interactive)
   (multi-term))
+
+;; 解决Mac上面直接启动Emacs,而不是终端启动Emacs的PATH问题
+(exec-path-from-shell-initialize)
