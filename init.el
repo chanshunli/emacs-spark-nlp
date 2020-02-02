@@ -24,7 +24,8 @@
         yasnippet
         company-posframe
         clj-refactor
-        magit))
+        magit
+        neotree))
 
 (package-initialize)
 
@@ -132,7 +133,7 @@
 
 ;; steve
 (define-key global-map (kbd "C-x C-o") 'counsel-projectile-switch-project)
-
+;; 需要在*scratch*的buffer下才能执行成功
 (define-key global-map (kbd "C-x C-a") 'counsel-projectile-ag)
 
 (define-key global-map (kbd "C-p") 'counsel-projectile-find-file)
@@ -209,3 +210,5 @@
 ;; M-. cider定义跳转, M-, cider定义返回
 
 ;; M-x magit-status => TODO: d 是 diff, a是add, c是checkout, #  按下修改的文件就会打印出来
+
+(global-set-key [f8] 'neotree-toggle)
