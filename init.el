@@ -162,8 +162,8 @@
 (global-set-key (kbd "C-<") 'mc/skip-to-next-like-this)
 
 ;; d 是 %, j下一个表达式 k上一个表达式, e是执行
-;; s和w可以交换表达式, 大于号吞表达式,小于号吐出来表达式
-;; c克隆
+;; s和w可以交换表达式, 大于号吞表达式,小于号吐出来表达式 ;; c克隆
+;; 注释掉就可以避免lispy的编辑模式了, M-@ 一直按下去会向下选中
 (add-hook 'emacs-lisp-mode-hook 'lispy-mode)
 (add-hook 'clojure-mode-hook 'lispy-mode)
 
@@ -177,6 +177,7 @@
 
 (setq cider-prompt-for-symbol nil)
 
+;; TODO: 在mutil-term下面不需要这个补全,不然会导致zsh的补齐不了
 (define-key company-mode-map (kbd "<tab>") 'company-indent-or-complete-common)
 (define-key company-mode-map (kbd "TAB") 'company-indent-or-complete-common)
 ;; 补全列表的中文错位问题
