@@ -150,6 +150,8 @@
 ;; M-> & M-< 跳到最后;;*
 (global-set-key (kbd "C-c m") 'end-of-buffer)
 (global-set-key (kbd "M-g") 'goto-line)
+;; "M-@"的当前选择光标开始选择
+(global-set-key (kbd "M-2") 'set-mark-command)
 
 ;; 运行上一条执行的命令
 (global-set-key (kbd "M-p") 'ivy-resume)
@@ -172,6 +174,7 @@
 ;; 注释掉就可以避免lispy的编辑模式了, M-@ 一直按下去会向下选中
 ;; m 是选中一个s表达式: https://github.com/abo-abo/lispy ;; M-w 复制单行
 ;; M格式化多行, i是缩进
+;; 删除单个括号的办法: M-@选中单个括号就能删除它了
 (add-hook 'emacs-lisp-mode-hook 'lispy-mode)
 (add-hook 'clojure-mode-hook 'lispy-mode)
 
