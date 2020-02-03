@@ -245,10 +245,13 @@
 ;; 解决Mac上面直接启动Emacs,而不是终端启动Emacs的PATH问题
 (exec-path-from-shell-initialize)
 
-(defun swich-scratch ()
-  (interactive)
-  (switch-to-buffer "*scratch*"))
-(global-set-key (kbd "C-x s") 'swich-scratch)
+;; 切换到scratch才能切换到其他项目来搜索文件
+(global-set-key
+ (kbd "C-x s")
+ (lambda ()
+   (interactive)
+   (switch-to-buffer "*scratch*")
+   (counsel-projectile-find-file)))
 
 ;; M-x describe-variable
 
