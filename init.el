@@ -278,6 +278,14 @@
   (interactive)
   (find-file "~/.zshrc"))
 
+;; 迁移原有的配置查看
+(defun v-old ()
+  (interactive)
+  (find-file "~/old_emacs_spark/init.el"))
+(defun v-clj ()
+  (interactive)
+  (find-file "~/old_emacs_spark/_closhrc"))
+
 (defun push-it-real-good (&rest keys)
   (execute-kbd-macro
    (apply
@@ -287,3 +295,10 @@
        (cond ((listp k) (apply 'append k))
              (t (read-kbd-macro k))))
      keys))))
+
+;; 全局都用shadow
+(setq-default cider-default-cljs-repl 'shadow)
+
+(add-to-list 'load-path "~/emacs_spark/elisp/")
+;; (require 'jim-proxy)
+(require 'kungfu)
