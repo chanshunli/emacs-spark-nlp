@@ -239,7 +239,7 @@
 ;; 在Emacs启动的mutil-term是zsh # 在外面终端启动的是closh
 (defun zsh ()
   (interactive)
-  (multi-term))
+  (vterm))
 
 ;; 解决Mac上面直接启动Emacs,而不是终端启动Emacs的PATH问题
 (exec-path-from-shell-initialize)
