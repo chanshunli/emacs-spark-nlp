@@ -299,7 +299,7 @@
      keys))))
 
 ;; 全局都用shadow
-(setq-default cider-default-cljs-repl 'shadow-cljs)
+(setq-default cider-default-cljs-repl 'shadow)
 
 ;; === 分出去文件的配置
 (add-to-list 'load-path "~/emacs_spark/elisp/")
@@ -308,7 +308,7 @@
 ;; ===
 
 (require 'wgrep)
-(require 'wgrep-ag)
+(require 'wgrep-ag)                     ;;装了这个之后就能用projectile-ag了
 
 ;; 同时修改多个文件的某个关键词
 ;;### 1. projectile-grep搜索关键词
@@ -322,4 +322,5 @@
 
 (defun gag ()
   (interactive)
-  (projectile-grep))
+  ;; (projectile-grep)
+  (projectile-ag))
