@@ -30,7 +30,8 @@
         exec-path-from-shell
         vterm
         doom-themes
-        use-package))
+        use-package
+        dash))
 
 (package-initialize)
 
@@ -246,3 +247,19 @@
 (defun swich-scratch ()
   (interactive)
   (switch-to-buffer "*scratch*"))
+(global-set-key (kbd "C-x s") 'swich-scratch)
+
+;; M-x describe-variable
+
+;;;; multi-term中文的配置 => ~/.zshenv
+(setq multi-term-program "/bin/zsh")
+;; Use Emacs terminfo, not system terminfo, mac系统出现了4m
+(setq system-uses-terminfo nil)
+;; 解决中文显示不了的问题
+;; export LANG='en_US.UTF-8'
+;; export LC_ALL="en_US.UTF-8"
+(add-hook
+ 'term-mode-hook
+ (lambda () (yas-minor-mode -1)))
+
+;; (global-set-key (kbd "C-x b") 'helm-buffers-list)
