@@ -264,3 +264,23 @@
  (lambda () (yas-minor-mode -1)))
 
 ;; (global-set-key (kbd "C-x b") 'helm-buffers-list)
+
+;; 定时做减法是整理的艺术
+(defun vv ()
+  (interactive)
+  (find-file "~/emacs_spark/init.el"))
+
+;; 做一个在终端中使用find-file: ec --eval "(find-file file)" => ef的shell函数打开文件
+(defun vvv ()
+  (interactive)
+  (find-file "~/.zshrc"))
+
+(defun push-it-real-good (&rest keys)
+  (execute-kbd-macro
+   (apply
+    'vconcat
+    (mapcar
+     (lambda (k)
+       (cond ((listp k) (apply 'append k))
+             (t (read-kbd-macro k))))
+     keys))))
