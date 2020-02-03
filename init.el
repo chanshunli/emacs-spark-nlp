@@ -32,7 +32,8 @@
         doom-themes
         use-package
         dash
-        wgrep))
+        wgrep
+        wgrep-ag))
 
 (package-initialize)
 
@@ -307,12 +308,18 @@
 ;; ===
 
 (require 'wgrep)
+(require 'wgrep-ag)
 
 ;; 同时修改多个文件的某个关键词
 ;;### 1. projectile-grep搜索关键词
 ;;### 2. wgrep-change-to-wgrep-mode
 ;;### 3. mutil-cursors 选择多个 C->,然后修改
 ;;### 4. C-c C-c
+;; ## 5.点击关闭Emacs就会提示你保存文件
 (defun gsub ()
   (interactive)
   (wgrep-change-to-wgrep-mode))
+
+(defun gag ()
+  (interactive)
+  (projectile-grep))
