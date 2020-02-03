@@ -141,7 +141,7 @@
 
 ;; steve
 (define-key global-map (kbd "C-x C-o") 'counsel-projectile-switch-project)
-;; 需要在*scratch*的buffer下才能执行成功
+;; 需要在*scratch*的buffer下才能执行成功 # 搜索中文需要加一个空格在中文词后面
 (define-key global-map (kbd "C-x C-a") 'counsel-projectile-ag)
 
 (define-key global-map (kbd "C-p") 'counsel-projectile-find-file)
@@ -176,6 +176,7 @@
 ;; m 是选中一个s表达式: https://github.com/abo-abo/lispy ;; M-w 复制单行
 ;; M格式化多行, i是缩进
 ;; 删除单个括号的办法: M-@选中单个括号就能删除它了
+;; -和a_标记 可以vim模拟跳转点
 (add-hook 'emacs-lisp-mode-hook 'lispy-mode)
 (add-hook 'clojure-mode-hook 'lispy-mode)
 
