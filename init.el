@@ -31,7 +31,8 @@
         vterm
         doom-themes
         use-package
-        dash))
+        dash
+        wgrep))
 
 (package-initialize)
 
@@ -297,8 +298,21 @@
      keys))))
 
 ;; 全局都用shadow
-(setq-default cider-default-cljs-repl 'shadow)
+(setq-default cider-default-cljs-repl 'shadow-cljs)
 
+;; === 分出去文件的配置
 (add-to-list 'load-path "~/emacs_spark/elisp/")
 ;; (require 'jim-proxy)
 (require 'kungfu)
+;; ===
+
+(require 'wgrep)
+
+;; 同时修改多个文件的某个关键词
+;;### 1. projectile-grep搜索关键词
+;;### 2. wgrep-change-to-wgrep-mode
+;;### 3. mutil-cursors 选择多个 C->,然后修改
+;;### 4. C-c C-c
+(defun gsub ()
+  (interactive)
+  (wgrep-change-to-wgrep-mode))
