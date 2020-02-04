@@ -33,7 +33,8 @@
         use-package
         dash
         wgrep
-        wgrep-ag))
+        wgrep-ag
+        request))
 
 (package-initialize)
 
@@ -260,7 +261,7 @@
    (switch-to-buffer "*scratch*")
    (counsel-projectile-find-file)))
 
-;; M-x describe-variable
+;; M-x describe-variable => `C-h v` 除了函数名字补全`C-h f`,键位名`C-h k`, 就是相关变量查询学习一个库的使用(源码式的学习)
 
 ;;;; multi-term中文的配置 => ~/.zshenv
 (setq multi-term-program "/bin/zsh")
@@ -318,11 +319,12 @@
 ;; 全局都用shadow ;;没用
 (setq-default cider-default-cljs-repl 'shadow)
 
-;; === 分出去文件的配置
+;; === 分出去文件的配置: 不同的文件放不同的功能,整理好,为道益损 ===
 (add-to-list 'load-path "~/emacs_spark/elisp/")
-;; (require 'jim-proxy)
+(require 'jim-proxy)
 (require 'kungfu)
-;; ===
+(require 'code-search)
+;; === 配置结束 ===
 
 (require 'wgrep)
 (require 'wgrep-ag)                     ;;装了这个之后就能用projectile-ag了

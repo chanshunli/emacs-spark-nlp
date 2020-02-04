@@ -32,3 +32,5 @@
   (if url-proxy-services
       (unset-proxy)
     (set-proxy)))
+
+(provide 'jim-proxy)
