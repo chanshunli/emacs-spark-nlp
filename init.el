@@ -147,7 +147,7 @@
 (define-key global-map (kbd "C-x C-a") 'counsel-projectile-ag)
 
 (define-key global-map (kbd "C-p") 'counsel-projectile-find-file)
-;; 关闭所有buffer: 针对project来的
+;; 关闭所有buffer: 针对project来的 # 需要在repl的buffer下面执行才有效=>会问你要不要关掉repl,你选择no,其他文件都会被关掉,关于这个项目的
 (define-key global-map (kbd "C-c C-q") 'projectile-kill-buffers)
 
 ;; M-> & M-< 跳到最后;;*
@@ -303,7 +303,7 @@
              (t (read-kbd-macro k))))
      keys))))
 
-;; 一个项目同时连接clojure和cljs两个repl: jack => sibl
+;; 一个项目同时连接clojure和cljs两个repl: 打开项目的一个cljs文件,然后在文件下面依次执行命令 => jack => sibl
 (defun jack ()
   "1. deps.edn + shadow的前端的cider repl连接"
   (interactive)
