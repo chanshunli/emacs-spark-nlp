@@ -303,7 +303,19 @@
              (t (read-kbd-macro k))))
      keys))))
 
-;; 全局都用shadow
+;; 一个项目同时连接clojure和cljs两个repl: jack => sibl
+(defun jack ()
+  "1. deps.edn + shadow的前端的cider repl连接"
+  (interactive)
+  (push-it-real-good
+   "M-x" "cider-jack-in-cljs"
+   "<return>" "shadow-cljs"))
+(defun sibl ()
+  "2. 先要启动jack,需要在cljs:shadow的buffer下面启动才行"
+  (interactive)
+  (cider-connect-sibling-clj nil))
+
+;; 全局都用shadow ;;没用
 (setq-default cider-default-cljs-repl 'shadow)
 
 ;; === 分出去文件的配置
@@ -329,3 +341,8 @@
   (interactive)
   ;; (projectile-grep)
   (projectile-ag))
+
+(defun cd-pro ()
+  "TODO: 按键C-d之后就弹出一个经常去的目录的列表,选择vterm去的目录"
+  (interactive)
+  nil)
