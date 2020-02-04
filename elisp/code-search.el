@@ -1,6 +1,11 @@
 ;; 增加下面h函数到cider包的cider-overlays.el文件下面,
 ;; 然后(byte-compile-file "cider-overlays.el")
 ;; => TODO: 如何变成cider的hook来加载进去?
+;; TODOS more 有意思的事情,兴趣商业化,而不仅仅兴趣职业化:
+;; 1. 通过request来查找线上的代码: 词向量的搜索功能, 代码向量
+;; 2. 在Emacs里面完成集合搜索ciderS表达式代码
+;; 3. 可以查找Cider的repl历史,自己的文档
+;; 4. 根据历史频率出现高的代码模式来写yasnippet代码模板生成=>用于代码生成
 
 (require 'request)
 
