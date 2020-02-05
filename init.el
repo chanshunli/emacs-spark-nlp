@@ -147,6 +147,10 @@
 ;; 需要在*scratch*的buffer下才能执行成功 # 搜索中文需要加一个空格在中文词后面
 (define-key global-map (kbd "C-x C-a") 'counsel-projectile-ag)
 
+(defun cag ()
+  (interactive)
+  (counsel-projectile-ag))
+
 (define-key global-map (kbd "C-p") 'counsel-projectile-find-file)
 ;; 关闭所有buffer: 针对project来的 # 需要在repl的buffer下面执行才有效=>会问你要不要关掉repl,你选择no,其他文件都会被关掉,关于这个项目的
 (define-key global-map (kbd "C-c C-q") 'projectile-kill-buffers)
@@ -324,6 +328,7 @@
 (require 'jim-proxy)
 (require 'kungfu)
 (require 'code-search)
+(require 'jim-config)
 ;; === 配置结束 ===
 
 (require 'wgrep)
@@ -348,3 +353,7 @@
   "TODO: 按键C-d之后就弹出一个经常去的目录的列表,选择vterm去的目录"
   (interactive)
   nil)
+
+;; 很多函数式的方法: https://github.com/magnars/dash.el
+(require 'dash)
+(put 'upcase-region 'disabled nil)

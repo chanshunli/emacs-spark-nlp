@@ -17,3 +17,4 @@ ido.last
 recentf
 smex-items
 temp.el
+elisp/jim-env.el
