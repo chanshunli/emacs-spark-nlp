@@ -41,26 +41,32 @@
   (let* ((buffer-name (->
                        start-cljs-file
                        (split-string "/")
-                       last car)))
+                       last
+                       car)))
     (progn
+      (message "Jack in cljs cider...")
       (open-cljs-file)
       (switch-to-buffer buffer-name)
-      (with-current-buffer buffer-name
-        (jack))
-      ;; TODO: 把 DO1 2 3 连起来,当启动第一步成功的时候启动第二步
-      (thread-first
-          (progn
-            (sleep-for 10)
-            (message "设置cider变量...")
-            (set-cider-buffer-name)))
-      ;;
-      )))
+      (with-current-buffer
+          buffer-name
+        (jack)))))
+
+(setq sibl-run "false")
 
 ;; DO 3 ;
 (defun siblj ()
   (interactive)
-  (switch-to-buffer cljs-buffer-name)
-  (with-current-buffer cljs-buffer-name
-    (sibl)))
+  (if (equal sibl-run "false")
+      (progn
+        (setq sibl-run "true")
+        (message "从cljs的repl(包含了clj)分出来一个clj的repl...")
+        (set-cider-buffer-name)
+        (switch-to-buffer cljs-buffer-name)
+        (with-current-buffer cljs-buffer-name
+          (sibl)))
+    (message "sibl已经启动")))
+
+;; 把 DO1 2 3 连起来,当启动第一步成功的时候启动第二步
+(add-hook 'cider-connected-hook 'siblj)
 
 (provide 'jim-config)
