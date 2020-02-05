@@ -35,6 +35,16 @@
              first
              (format "%s"))))
 
+(defun eval-clj-core (clj-code)
+  "in clj repl:  (eval-clj-core \"(map inc [1 2 3])\") => [2 3 4]
+   in cljs repl: (eval-clj-core \"(js/console.log 11111)\")"
+  (interactive)
+  (thread-first
+      (cider-nrepl-sync-request:eval
+       clj-code)
+    (nrepl-dict-get "value")
+    (read)))
+
 ;; DO 1 ;
 (defun jackj ()
   (interactive)
