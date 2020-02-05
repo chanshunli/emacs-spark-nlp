@@ -45,6 +45,8 @@
     (nrepl-dict-get "value")
     (read)))
 
+(setq sibl-run "false")
+
 ;; DO 1 ;
 (defun jackj ()
   (interactive)
@@ -55,25 +57,25 @@
                        car)))
     (progn
       (message "Jack in cljs cider...")
+      (setq sibl-run "false")
       (open-cljs-file)
       (switch-to-buffer buffer-name)
       (with-current-buffer
           buffer-name
         (jack)))))
 
-(setq sibl-run "false")
-
 ;; DO 3 ;
 (defun siblj ()
   (interactive)
-  (if (equal sibl-run "false")
+  (if (equal sibl-run "false") ;; 如果不加这一行,只分一次sibl clj,就会死循环启动
       (progn
         (setq sibl-run "true")
         (message "从cljs的repl(包含了clj)分出来一个clj的repl...")
         (set-cider-buffer-name)
         (switch-to-buffer cljs-buffer-name)
         (with-current-buffer cljs-buffer-name
-          (sibl)))
+          (sibl))
+        (find-file start-clj-file))
     (message "sibl已经启动")))
 
 ;; 把 DO1 2 3 连起来,当启动第一步成功的时候启动第二步
