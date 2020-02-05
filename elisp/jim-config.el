@@ -48,11 +48,11 @@
       (with-current-buffer buffer-name
         (jack))
       ;; TODO: 把 DO1 2 3 连起来,当启动第一步成功的时候启动第二步
-      ;; (set-cider-buffer-name) ;;写在这里无效; 因为repl还没启动完成就结束执行了这一行
-      ;; (setq cljs-buffer-name (get-cljs-buffer-name (get-cider-port))) ;; 没有拿到buffername是拿不到port的,先有鸡还是先有蛋的问题
-      (sleep-for 3)
-      (set-cider-buffer-name)
-      ;; (siblj)
+      (thread-first
+          (progn
+            (sleep-for 10)
+            (message "设置cider变量...")
+            (set-cider-buffer-name)))
       ;;
       )))
 

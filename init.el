@@ -356,4 +356,3 @@
 
 ;; 很多函数式的方法: https://github.com/magnars/dash.el
 (require 'dash)
-(put 'upcase-region 'disabled nil)
