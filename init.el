@@ -173,9 +173,9 @@
 ;; M-w w 复制一个单词 和表达式
 (global-set-key (kbd "M-w") 'easy-kill)
 
-;; 多光标编辑: C-@选中 => C-> 下一个 ... => 回车退出
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/skip-to-next-like-this)
+;; 多光标编辑: C-@选中 => C-> 下一个 ... => 回车退出 => C->在ssh上用不了
+(global-set-key (kbd "M->") 'mc/mark-next-like-this)
+(global-set-key (kbd "M-<") 'mc/skip-to-next-like-this)
 
 ;; d 是 %, j下一个表达式 k上一个表达式, e是执行
 ;; s和w可以交换表达式, 大于号吞表达式,小于号吐出来表达式 ;; c克隆
@@ -347,7 +347,8 @@
 (defun gag ()
   (interactive)
   ;; (projectile-grep)
-  (projectile-ag))
+  ;; (projectile-ag)
+  (call-interactively #'projectile-ripgrep)) ;; 交互调用一个命令
 
 (defun cd-pro ()
   "TODO: 按键C-d之后就弹出一个经常去的目录的列表,选择vterm去的目录"
@@ -356,3 +357,8 @@
 
 ;; 很多函数式的方法: https://github.com/magnars/dash.el
 (require 'dash)
+
+;; `C-w` 删除矩形选择
+(defun gs ()
+  (interactive)
+  (magit-status))
