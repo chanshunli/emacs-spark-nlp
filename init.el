@@ -34,7 +34,8 @@
         dash
         wgrep
         wgrep-ag
-        request))
+        request
+        ripgrep))
 
 (package-initialize)
 
@@ -149,7 +150,7 @@
 
 (defun cag ()
   (interactive)
-  (counsel-projectile-ag))
+  (call-interactively #'counsel-projectile-ag))
 
 (define-key global-map (kbd "C-p") 'counsel-projectile-find-file)
 ;; 关闭所有buffer: 针对project来的 # 需要在vterm的buffer下面执行才有效=>会问你要不要关掉repl,你选择no,其他文件都会被关掉,关于这个项目的
@@ -329,6 +330,7 @@
 (require 'kungfu)
 (require 'code-search)
 (require 'jim-config)
+(require 'jim-lispy)
 ;; === 配置结束 ===
 
 (require 'wgrep)
