@@ -146,7 +146,12 @@
 ;; steve
 (define-key global-map (kbd "C-x C-o") 'counsel-projectile-switch-project)
 ;; 需要在*scratch*的buffer下才能执行成功 # 搜索中文需要加一个空格在中文词后面
-(define-key global-map (kbd "C-x C-a") 'counsel-projectile-ag)
+;; (define-key global-map (kbd "C-x C-a") 'counsel-projectile-ag)
+(global-set-key
+ (kbd "C-x C-a")
+ (lambda ()
+   (interactive)
+   (call-interactively #'counsel-projectile-ag)))
 
 (defun cag ()
   (interactive)
@@ -266,6 +271,14 @@
    (switch-to-buffer "*scratch*")
    (counsel-projectile-find-file)))
 
+;; 可以ag查其他项目: 多项目切换方便一些,不用先打开一个文件在ag一下
+(global-set-key
+ (kbd "C-x f")
+ (lambda ()
+   (interactive)
+   (switch-to-buffer "*scratch*")
+   (call-interactively #'counsel-projectile-ag)))
+
 ;; M-x describe-variable => `C-h v` 除了函数名字补全`C-h f`,键位名`C-h k`, 就是相关变量查询学习一个库的使用(源码式的学习)
 
 ;;;; multi-term中文的配置 => ~/.zshenv
@@ -342,15 +355,20 @@
 ;;### 3. mutil-cursors 选择多个 C->,然后修改
 ;;### 4. C-c C-c
 ;; ## 5.点击关闭Emacs就会提示你保存文件
-(defun gsub ()
-  (interactive)
-  (wgrep-change-to-wgrep-mode))
-
 (defun gag ()
+  "1. 查询关键词的列表出来"
   (interactive)
   ;; (projectile-grep)
   ;; (projectile-ag)
   (call-interactively #'projectile-ripgrep)) ;; 交互调用一个命令
+(defun gsub ()
+  "2. 进入wgrep模式,多文件编辑 => M->多个关键词同时修改"
+  (interactive)
+  (wgrep-change-to-wgrep-mode))
+(defun saveb ()
+  "3. 保存多个被修改的文件"
+  (interactive)
+  (call-interactively #'save-some-buffers))
 
 (defun cd-pro ()
   "TODO: 按键C-d之后就弹出一个经常去的目录的列表,选择vterm去的目录"
@@ -364,3 +382,5 @@
 (defun gs ()
   (interactive)
   (magit-status))
+
+;; M-shift-@ 是选中一个单词,连续按两下@@就是向前移动一个词会跳过-_
