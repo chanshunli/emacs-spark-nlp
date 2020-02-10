@@ -314,7 +314,7 @@
 ;; 定时做减法是整理的艺术
 (defun vv ()
   (interactive)
-  (find-file "~/emacs_spark/init.el"))
+  (find-file "~/.emacs.d/init.el"))
 
 ;; 做一个在终端中使用find-file: ec --eval "(find-file file)" => ef的shell函数打开文件
 (defun vvv ()
