@@ -217,9 +217,14 @@
 ;; (company-posframe-mode 1)
 ;; C-c C-c执行顶级表达式:忽略掉(comment (+ 1 2))
 
+(defun yas-or-company ()
+  (let ((yas/fallback-behavior 'return-nil))
+      (or (yas/expand)
+          (company-complete-common))))
+
 (use-package company :bind
-  (("<tab>" . 'company-indent-or-complete-common)
-   ("TAB" . 'company-indent-or-complete-common)))
+  (("<tab>" . 'yas-or-company)
+   ("TAB" . 'yas-or-company)))
 
 (setq clojure-toplevel-inside-comment-form t)
 ;; 去掉强化的js补全,会导致很卡 => t是打开
@@ -392,3 +397,16 @@
 (defun gs ()
   (interactive)
   (magit-status))
+
+;; C-M-b #
+
+;;  a => 选择vim式的位置 ## 选得越快,用鼠标越少,编码越快
+;; 选中一个symbol字符串, sexp ## sexp => list就是mark向外展开列表,m键无法往外展开
+(defun mark-symbol ()
+  (interactive)
+  (let ((bounds (bounds-of-thing-at-point 'sexp)))
+    (goto-char (cdr bounds))
+    (push-mark (car bounds) t t)))
+
+;; C-x m
+(define-key global-map (kbd "C-x m") 'mark-symbol)
