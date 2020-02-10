@@ -190,6 +190,8 @@
 ;; M格式化多行, i是缩进
 ;; 删除单个括号的办法: M-@选中单个括号就能删除它了
 ;; -和a_标记 可以vim模拟跳转点
+;; M-shift-@ 是选中一个单词,连续按两下@@就是向前移动一个词会跳过-_
+;; 不用选择任何字符 M-> 就是 矩形编辑
 (add-hook 'emacs-lisp-mode-hook 'lispy-mode)
 (add-hook 'clojure-mode-hook 'lispy-mode)
 
@@ -224,7 +226,9 @@
 (setq cider-enhanced-cljs-completion-p t)
 
 (require 'hideshow)
-(define-key global-map (kbd "C-x C-h") 'hideshow-toggle-hidding)
+
+;; 显示隐藏的comment: 多行的表达式的开关
+(define-key global-map (kbd "C-x C-h") 'hs-toggle-hiding)
 
 ;; C-2出来用法注释
 (defun user/clojure-hide-comment (&rest args)
@@ -233,7 +237,10 @@
       (hs-hide-block))))
 (add-hook 'clojure-mode-hook 'user/clojure-hide-comment)
 
+(add-hook 'prog-mode-hook #'hs-minor-mode)
+
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
+
 
 
 (defun e-c ()
@@ -311,6 +318,9 @@
 (defun v-clj ()
   (interactive)
   (find-file "~/old_emacs_spark/_closhrc"))
+(defun v-xon ()
+  (interactive)
+  (find-file "~/.xonshrc"))
 
 (defun push-it-real-good (&rest keys)
   (execute-kbd-macro
@@ -382,5 +392,3 @@
 (defun gs ()
   (interactive)
   (magit-status))
-
-;; M-shift-@ 是选中一个单词,连续按两下@@就是向前移动一个词会跳过-_
