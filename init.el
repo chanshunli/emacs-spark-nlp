@@ -217,10 +217,15 @@
 ;; (company-posframe-mode 1)
 ;; C-c C-c执行顶级表达式:忽略掉(comment (+ 1 2))
 
+(require 'yasnippet)
+
+(yas-reload-all)
+
 (defun yas-or-company ()
+  (interactive)
   (let ((yas/fallback-behavior 'return-nil))
-      (or (yas/expand)
-          (company-complete-common))))
+    (or (yas/expand)
+        (company-complete-common))))
 
 (use-package company :bind
   (("<tab>" . 'yas-or-company)
@@ -353,7 +358,7 @@
 (setq-default cider-default-cljs-repl 'shadow)
 
 ;; === 分出去文件的配置: 不同的文件放不同的功能,整理好,为道益损 ===
-(add-to-list 'load-path "~/emacs_spark/elisp/")
+(add-to-list 'load-path "~/.emacs.d/elisp/")
 (require 'jim-proxy)
 (require 'kungfu)
 (require 'code-search)
