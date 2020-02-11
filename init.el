@@ -253,7 +253,16 @@
 
 ;; M-. cider定义跳转, M-, cider定义返回
 
-;; M-x magit-status => TODO: d 是 diff, a是add, c是checkout, #  按下修改的文件就会打印出来
+;; M-x magit-status => #  按下修改的文件就会打印出来
+;; ## git add # s
+;; ### commmit # cc
+;; ### C-c C-c
+;; ## P ## -> u 选远程分支
+;; ## F 更新 pull => u
+;; ## l # log ## tig
+;; ## => tab展开文件的git log
+;; ## q退出
+;; ## C-g 推出终端
 
 (global-set-key [f8] 'neotree-toggle)
 
@@ -322,3 +331,5 @@
 ;; === 配置结束 ===
 
 (global-set-key (kbd "C-c v") 'jw-eval-or-clear-buffer)
+
+(setq clojure-indent-style 'always-indent)
