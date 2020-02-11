@@ -62,7 +62,6 @@
 (counsel-projectile-mode 1)
 
 ;;(require 'helm-config)
-
 ;;(helm-projectile-on)
 
 ;; global:
@@ -131,7 +130,6 @@
 ;; Delete trailing whitespace on save.
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-
 ;; Custom file path
 ;; Actually we don't need custom file, this file can be generated
 ;; accidentally, so we add this file to .gitignore and never load it.
@@ -152,10 +150,6 @@
  (lambda ()
    (interactive)
    (call-interactively #'counsel-projectile-ag)))
-
-(defun cag ()
-  (interactive)
-  (call-interactively #'counsel-projectile-ag))
 
 (define-key global-map (kbd "C-p") 'counsel-projectile-find-file)
 ;; 关闭所有buffer: 针对project来的 # 需要在vterm的buffer下面执行才有效=>会问你要不要关掉repl,你选择no,其他文件都会被关掉,关于这个项目的
@@ -194,6 +188,14 @@
 ;; 不用选择任何字符 M-> 就是 矩形编辑
 (add-hook 'emacs-lisp-mode-hook 'lispy-mode)
 (add-hook 'clojure-mode-hook 'lispy-mode)
+;;  a => 选择vim式的位置 ## 选得越快,用鼠标越少,编码越快
+;; 选中一个symbol字符串, sexp ## sexp => list就是mark向外展开列表,m键无法往外展开
+(defun mark-symbol ()
+  (interactive)
+  (let ((bounds (bounds-of-thing-at-point 'sexp)))
+    (goto-char (cdr bounds))
+    (push-mark (car bounds) t t)))
+(define-key global-map (kbd "C-x m") 'mark-symbol)
 
 ;; 用 `emacs --daemon` => `emacsclient -c`
 (require 'server)
@@ -204,18 +206,6 @@
 (setq cider-offer-to-open-cljs-app-in-browser nil)
 
 (setq cider-prompt-for-symbol nil)
-
-;; TODO: 在mutil-term下面不需要这个补全,不然会导致zsh的补齐不了
-;; (eval-after-load
-;;     'company-mode
-;;   (progn
-;;     (define-key company-mode-map (kbd "<tab>")
-;;       'company-indent-or-complete-common)
-;;     (define-key company-mode-map (kbd "TAB")
-;;       'company-indent-or-complete-common)))
-;; 补全列表的中文错位问题
-;; (company-posframe-mode 1)
-;; C-c C-c执行顶级表达式:忽略掉(comment (+ 1 2))
 
 (require 'yasnippet)
 
@@ -251,12 +241,6 @@
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
-
-
-(defun e-c ()
-  (interactive)
-  (cider-pprint-eval-last-sexp-to-comment))
-
 (defun my-clojure-mode-hook ()
   (clj-refactor-mode 1)
   (yas-minor-mode 1)        ; for adding require/use/import statements
@@ -271,11 +255,6 @@
 ;; M-x magit-status => TODO: d 是 diff, a是add, c是checkout, #  按下修改的文件就会打印出来
 
 (global-set-key [f8] 'neotree-toggle)
-
-;; 在Emacs启动的mutil-term是zsh # 在外面终端启动的是closh
-(defun zsh ()
-  (interactive)
-  (vterm))
 
 ;; 解决Mac上面直接启动Emacs,而不是终端启动Emacs的PATH问题
 (exec-path-from-shell-initialize)
@@ -311,27 +290,6 @@
 
 ;; (global-set-key (kbd "C-x b") 'helm-buffers-list)
 
-;; 定时做减法是整理的艺术
-(defun vv ()
-  (interactive)
-  (find-file "~/.emacs.d/init.el"))
-
-;; 做一个在终端中使用find-file: ec --eval "(find-file file)" => ef的shell函数打开文件
-(defun vvv ()
-  (interactive)
-  (find-file "~/.zshrc"))
-
-;; 迁移原有的配置查看
-(defun v-old ()
-  (interactive)
-  (find-file "~/old_emacs_spark/init.el"))
-(defun v-clj ()
-  (interactive)
-  (find-file "~/old_emacs_spark/_closhrc"))
-(defun v-xon ()
-  (interactive)
-  (find-file "~/.xonshrc"))
-
 (defun push-it-real-good (&rest keys)
   (execute-kbd-macro
    (apply
@@ -342,76 +300,24 @@
              (t (read-kbd-macro k))))
      keys))))
 
-;; 一个项目同时连接clojure和cljs两个repl: 打开项目的一个cljs文件,然后在文件下面依次执行命令 => jack => sibl
-(defun jack ()
-  "1. deps.edn + shadow的前端的cider repl连接"
-  (interactive)
-  (push-it-real-good
-   "M-x" "cider-jack-in-cljs"
-   "<return>" "shadow-cljs"))
-(defun sibl ()
-  "2. 先要启动jack,需要在cljs:shadow的buffer下面启动才行"
-  (interactive)
-  (cider-connect-sibling-clj nil))
-
 ;; 全局都用shadow ;;没用
 (setq-default cider-default-cljs-repl 'shadow)
 
+(require 'wgrep)
+(require 'wgrep-ag) ;;装了这个之后就能用projectile-ag了
+
+;; 很多函数式的方法: https://github.com/magnars/dash.el
+(require 'dash)
+
 ;; === 分出去文件的配置: 不同的文件放不同的功能,整理好,为道益损 ===
 (add-to-list 'load-path "~/.emacs.d/elisp/")
+(require 'zshrc-alias)  ;; zshrc alias的思想
 (require 'jim-proxy)
 (require 'kungfu)
 (require 'code-search)
 (require 'jim-config)
 (require 'jim-lispy)
+(require 'jim-eval-buffer)
 ;; === 配置结束 ===
 
-(require 'wgrep)
-(require 'wgrep-ag)                     ;;装了这个之后就能用projectile-ag了
-
-;; 同时修改多个文件的某个关键词
-;;### 1. projectile-grep搜索关键词
-;;### 2. wgrep-change-to-wgrep-mode
-;;### 3. mutil-cursors 选择多个 C->,然后修改
-;;### 4. C-c C-c
-;; ## 5.点击关闭Emacs就会提示你保存文件
-(defun gag ()
-  "1. 查询关键词的列表出来"
-  (interactive)
-  ;; (projectile-grep)
-  ;; (projectile-ag)
-  (call-interactively #'projectile-ripgrep)) ;; 交互调用一个命令
-(defun gsub ()
-  "2. 进入wgrep模式,多文件编辑 => M->多个关键词同时修改"
-  (interactive)
-  (wgrep-change-to-wgrep-mode))
-(defun saveb ()
-  "3. 保存多个被修改的文件"
-  (interactive)
-  (call-interactively #'save-some-buffers))
-
-(defun cd-pro ()
-  "TODO: 按键C-d之后就弹出一个经常去的目录的列表,选择vterm去的目录"
-  (interactive)
-  nil)
-
-;; 很多函数式的方法: https://github.com/magnars/dash.el
-(require 'dash)
-
-;; `C-w` 删除矩形选择
-(defun gs ()
-  (interactive)
-  (magit-status))
-
-;; C-M-b #
-
-;;  a => 选择vim式的位置 ## 选得越快,用鼠标越少,编码越快
-;; 选中一个symbol字符串, sexp ## sexp => list就是mark向外展开列表,m键无法往外展开
-(defun mark-symbol ()
-  (interactive)
-  (let ((bounds (bounds-of-thing-at-point 'sexp)))
-    (goto-char (cdr bounds))
-    (push-mark (car bounds) t t)))
-
-;; C-x m
-(define-key global-map (kbd "C-x m") 'mark-symbol)
+(global-set-key (kbd "C-c v") 'jw-eval-or-clear-buffer)
