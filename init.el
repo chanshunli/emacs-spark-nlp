@@ -215,7 +215,8 @@
   (interactive)
   (let ((yas/fallback-behavior 'return-nil))
     (or (yas/expand)
-        (company-complete-common))))
+        ;; (company-complete-common) ;; 在空格处也会出来补全列表
+        (call-interactively #'company-indent-or-complete-common))))
 
 (use-package company :bind
   (("<tab>" . 'yas-or-company)
