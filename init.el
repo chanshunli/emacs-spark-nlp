@@ -248,9 +248,9 @@
   ;; This choice of keybinding leaves cider-macroexpand-1 unbound
   (cljr-add-keybindings-with-prefix "C-c C-m")
   (define-key global-map (kbd "C-c C-o") 'cider-pprint-eval-last-sexp-to-comment))
-
 (add-hook 'clojure-mode-hook #'my-clojure-mode-hook)
 
+(setq clojure-indent-style 'always-indent)
 ;; M-. cider定义跳转, M-, cider定义返回
 
 ;; M-x magit-status => #  按下修改的文件就会打印出来
@@ -328,8 +328,7 @@
 (require 'jim-config)
 (require 'jim-lispy)
 (require 'jim-eval-buffer)
+(require 'jim-clj-alias)
 ;; === 配置结束 ===
 
 (global-set-key (kbd "C-c v") 'jw-eval-or-clear-buffer)
-
-(setq clojure-indent-style 'always-indent)
