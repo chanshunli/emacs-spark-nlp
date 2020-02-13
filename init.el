@@ -322,13 +322,14 @@
 ;; === 分出去文件的配置: 不同的文件放不同的功能,整理好,为道益损 ===
 (add-to-list 'load-path "~/.emacs.d/elisp/")
 (require 'zshrc-alias)  ;; zshrc alias的思想
-(require 'jim-proxy)
 (require 'kungfu)
 (require 'code-search)
+(require 'jim-proxy)
 (require 'jim-config)
 (require 'jim-lispy)
 (require 'jim-eval-buffer)
 (require 'jim-clj-alias)
+(require 'jim-r-lisp)
 ;; === 配置结束 ===
 
 (global-set-key (kbd "C-c v") 'jw-eval-or-clear-buffer)
