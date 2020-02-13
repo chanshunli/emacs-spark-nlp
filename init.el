@@ -174,6 +174,7 @@
 (global-set-key (kbd "M-w") 'easy-kill)
 
 ;; 多光标编辑: C-@选中 => C-> 下一个 ... => 回车退出 => C->在ssh上用不了
+;; 直接M->会进行列选择矩形编辑: `C-w` 删除矩形选择,不能用delete键
 (global-set-key (kbd "M->") 'mc/mark-next-like-this)
 (global-set-key (kbd "M-<") 'mc/skip-to-next-like-this)
 
@@ -252,17 +253,6 @@
 
 (setq clojure-indent-style 'always-indent)
 ;; M-. cider定义跳转, M-, cider定义返回
-
-;; M-x magit-status => #  按下修改的文件就会打印出来
-;; ## git add # s
-;; ### commmit # cc
-;; ### C-c C-c
-;; ## P ## -> u 选远程分支
-;; ## F 更新 pull => u
-;; ## l # log ## tig
-;; ## => tab展开文件的git log
-;; ## q退出
-;; ## C-g 推出终端
 
 (global-set-key [f8] 'neotree-toggle)
 

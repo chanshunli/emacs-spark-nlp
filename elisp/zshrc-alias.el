@@ -82,7 +82,16 @@
   (interactive)
   nil)
 
-;; `C-w` 删除矩形选择
+;; M-x magit-status => #  按下修改的文件就会打印出来
+;; ## git add # s
+;; ### commmit # cc
+;; ### C-c C-c
+;; ## P ## -> u 选远程分支
+;; ## F 更新 pull => u
+;; ## l # log ## tig
+;; ## => tab展开文件的git log
+;; ## q退出
+;; ## C-g 推出终端
 (defun gs ()
   (interactive)
   (magit-status))
