@@ -10,10 +10,14 @@
 
 (defun appdb ()
   (interactive)
-  (eval-clj-core "(cljs.pprint/pprint re-frame.db/app-db)"))
+  (eval-clj-code "(cljs.pprint/pprint @re-frame.db/app-db)"))
 
-(defun p-reload ()
+(defun page-reload ()
   (interactive)
-  (eval-clj-core "(.reload js/location)"))
+  (eval-clj-code "(.reload js/location)"))
+
+(defun clear-storage ()
+  (interactive)
+  (eval-clj-code "(.clear js/localStorage)"))
 
 (provide 'jim-clj-alias)

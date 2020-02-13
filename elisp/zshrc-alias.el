@@ -88,7 +88,7 @@
 ;; ### C-c C-c
 ;; ## P ## -> u 选远程分支
 ;; ## F 更新 pull => u
-;; ## l # log ## tig
+;; ## ll # log ## tig
 ;; ## => tab展开文件的git log
 ;; ## q退出
 ;; ## C-g 推出终端
