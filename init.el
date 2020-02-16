@@ -314,6 +314,7 @@
 (require 'zshrc-alias)  ;; zshrc alias的思想
 (require 'kungfu)
 (require 'code-search)
+(require 'jim-elisp-regexp)
 (require 'jim-proxy)
 (require 'jim-config)
 (require 'jim-lispy)
@@ -323,3 +324,6 @@
 ;; === 配置结束 ===
 
 (global-set-key (kbd "C-c v") 'jw-eval-or-clear-buffer)
+
+;; dired 模式:
+;; = dired C-x C-q => 修改文件名 可以用mutil-c => C-x C-s

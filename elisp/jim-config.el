@@ -71,4 +71,33 @@
 ;; 把 DO1 2 3 连起来,当启动第一步成功的时候启动第二步
 (add-hook 'cider-connected-hook 'siblj)
 
+(defun get-mark-content (buffername)
+  (with-current-buffer
+      buffername
+    (buffer-substring-no-properties
+     (region-beginning)
+     (region-end))))
+
+(defun pom->clj ()
+  (interactive)
+  (let* ((marked-stri (get-mark-content (current-buffer)))
+         (stris (split-string marked-stri "\n"))
+         (pom-list
+          (-map
+           (lambda (stri)
+             (replace-regexp-in-string re-<> "\\3" stri))
+           (-filter
+            (lambda (stri)
+              (string-match re-pom stri))
+            stris))))
+    (progn
+      (kill-region (region-beginning) (region-end))
+      (insert
+       (concat
+        "\n" (nth 0 pom-list) "/"
+        (nth 1 pom-list) " "
+        "{:mvn/version \""
+        (nth 2 pom-list)
+        "\"}")))))
+
 (provide 'jim-config)
