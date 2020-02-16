@@ -78,8 +78,16 @@
      (region-beginning)
      (region-end))))
 
-(defun pom->clj ()
-  (interactive)
+(defun format-clj-deps (pom-list)
+  (insert
+   (concat
+    "\n" (nth 0 pom-list) "/"
+    (nth 1 pom-list) " "
+    "{:mvn/version \""
+    (nth 2 pom-list)
+    "\"}\n")))
+
+(defun get-marked-pom-deps-list ()
   (let* ((marked-stri (get-mark-content (current-buffer)))
          (stris (split-string marked-stri "\n"))
          (pom-list
@@ -90,14 +98,31 @@
             (lambda (stri)
               (string-match re-pom stri))
             stris))))
+    pom-list))
+
+(defun pom->clj ()
+  (interactive)
+  (let* ((pom-list
+          (get-marked-pom-deps-list)))
     (progn
       (kill-region (region-beginning) (region-end))
-      (insert
-       (concat
-        "\n" (nth 0 pom-list) "/"
-        (nth 1 pom-list) " "
-        "{:mvn/version \""
-        (nth 2 pom-list)
-        "\"}")))))
+      (format-clj-deps pom-list))))
+
+(defun format-lein-deps (pom-list)
+  (insert
+   (concat
+    "\n[" (nth 0 pom-list) "/"
+    (nth 1 pom-list) " "
+    "\""
+    (nth 2 pom-list)
+    "\"]\n")))
+
+(defun pom->lein ()
+  (interactive)
+  (let* ((pom-list
+          (get-marked-pom-deps-list)))
+    (progn
+      (kill-region (region-beginning) (region-end))
+      (format-lein-deps pom-list))))
 
 (provide 'jim-config)

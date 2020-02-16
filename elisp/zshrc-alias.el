@@ -96,6 +96,10 @@
   (interactive)
   (magit-status))
 
+(defun clj-pom ()
+  (interactive)
+  (shell-command-to-string "clojure -Spom"))
+
 ;; C-M-b #
 
 (provide 'zshrc-alias)
