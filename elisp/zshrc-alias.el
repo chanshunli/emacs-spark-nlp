@@ -92,6 +92,8 @@
 ;; ## => tab展开文件的git log
 ;; ## q退出
 ;; ## C-g 推出终端
+;; k是checkout文件
+;; r u 是rebase命令,去掉中间的多余merge的commit
 (defun gs ()
   (interactive)
   (magit-status))
@@ -99,6 +101,14 @@
 (defun clj-pom ()
   (interactive)
   (shell-command-to-string "clojure -Spom"))
+
+(defun red ()
+  (interactive)
+  (insert "#de211a"))
+
+(defun gray ()
+  (interactive)
+  (insert "#f8f8f8"))
 
 ;; C-M-b #
 
