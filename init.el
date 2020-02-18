@@ -35,7 +35,8 @@
         wgrep
         wgrep-ag
         request
-        ripgrep))
+        ripgrep
+        esup))
 
 (package-initialize)
 

@@ -72,7 +72,7 @@
   "2. 进入wgrep模式,多文件编辑 => M->多个关键词同时修改"
   (interactive)
   (wgrep-change-to-wgrep-mode))
-(defun saveb ()
+(defun gsave ()
   "3. 保存多个被修改的文件"
   (interactive)
   (call-interactively #'save-some-buffers))
