@@ -322,6 +322,7 @@
 (require 'jim-eval-buffer)
 (require 'jim-clj-alias)
 (require 'jim-r-lisp)
+(require 'jim-scaffold)
 ;; === 配置结束 ===
 
 (global-set-key (kbd "C-c v") 'jw-eval-or-clear-buffer)
