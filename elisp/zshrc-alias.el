@@ -102,13 +102,15 @@
   (interactive)
   (shell-command-to-string "clojure -Spom"))
 
+;; 暗红色
 (defun red ()
   (interactive)
-  (insert "#de211a"))
+  (insert "\"#de171a\""))
 
-(defun gray ()
+;; 白浅银灰色
+(defun gray-w ()
   (interactive)
-  (insert "#f8f8f8"))
+  (insert "\"#f8f8f8\""))
 
 ;; C-M-b #
 
