@@ -10,7 +10,7 @@
 ;; M 是格式化多行, O变成一行, m选中表达式
 (setq package-selected-packages
       '(ivy
-        cider
+        ;; cider
         clojure-mode
         smartparens
         projectile
@@ -23,7 +23,7 @@
         easy-kill
         yasnippet
         company-posframe
-        clj-refactor
+        ;;clj-refactor
         magit
         neotree
         multi-term
@@ -47,6 +47,10 @@
   (when (and (assq package package-archive-contents)
              (not (package-installed-p package)))
     (package-install package t)))
+
+;; 手机上的termux emacs的cider只能用el-get才能装上去 & 还有clj-refactor
+(add-to-list 'load-path "~/.emacs.d/elisp/")
+(require 'termux-emacs-el-get)
 
 ;; my setting
 (load-theme 'doom-molokai t)
@@ -138,7 +142,7 @@
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
-(scroll-bar-mode -1)
+;(scroll-bar-mode -1)
 
 (projectile-global-mode 1)
 
@@ -311,8 +315,8 @@
 (require 'dash)
 
 ;; === 分出去文件的配置: 不同的文件放不同的功能,整理好,为道益损 ===
-(add-to-list 'load-path "~/.emacs.d/elisp/")
-(require 'zshrc-alias)  ;; zshrc alias的思想
+;; (add-to-list 'load-path "~/.emacs.d/elisp/")
+(require 'zshrc-alias) ;; zshrc alias的思想
 (require 'kungfu)
 (require 'code-search)
 (require 'jim-elisp-regexp)
