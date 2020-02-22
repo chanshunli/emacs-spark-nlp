@@ -134,7 +134,10 @@
 ;; Custom file path
 ;; Actually we don't need custom file, this file can be generated
 ;; accidentally, so we add this file to .gitignore and never load it.
-(setq custom-file "~/.emacs.d/custom.el")
+(setq custom-file
+      (if (null (getenv "PWD"))
+          "~/.emacs.d/custom.el"
+        "~/emacs_spark/custom.el"))
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -311,7 +314,10 @@
 (require 'dash)
 
 ;; === 分出去文件的配置: 不同的文件放不同的功能,整理好,为道益损 ===
-(add-to-list 'load-path "~/.emacs.d/elisp/")
+(add-to-list 'load-path
+             (if (null (getenv "PWD"))
+                 "~/.emacs.d/elisp/" ;; in Mac Emacs UI
+               "~/emacs_spark/elisp/"))
 (require 'zshrc-alias)  ;; zshrc alias的思想
 (require 'kungfu)
 (require 'code-search)
