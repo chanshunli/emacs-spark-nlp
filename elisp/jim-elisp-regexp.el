@@ -6,6 +6,7 @@
 ;; reg-mark: '.*' 是会匹配 => `'abc', 'efg'`
 ;; '[A-Za-z]+' 是会匹配 => `'abc'`
 ;; mc/mark-all-in-region-regexp => '*' 会选中所有的'号 # [A-Za-z]+ mark所有单词
+;; 更快捷的forward"非矩形"复制: multiple cursors加一列光标，然后M-@ mark, 再然后C-M-f => M-w 复制 => 黏贴的地方必须要提前预留同样多行才能黏贴进去,不同于矩形的复制的黏贴,不需要多预留多行出来给黏贴使用
 (defun reg-mark ()
   "正则选中多行编辑"
   (interactive)
