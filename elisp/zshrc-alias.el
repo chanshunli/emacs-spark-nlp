@@ -40,7 +40,7 @@
 (defun v-clj ()
   (interactive)
   (find-file "~/old_emacs_spark/_closhrc"))
-(defun v-xon ()
+(defun v-py ()
   (interactive)
   (find-file "~/.xonshrc"))
 

@@ -2,6 +2,15 @@
 
 ;; https://www.emacswiki.org/emacs/RegularExpression
 
+
+;; reg-mark: '.*' 是会匹配 => `'abc', 'efg'`
+;; '[A-Za-z]+' 是会匹配 => `'abc'`
+;; mc/mark-all-in-region-regexp => '*' 会选中所有的'号 # [A-Za-z]+ mark所有单词
+(defun reg-mark ()
+  "正则选中多行编辑"
+  (interactive)
+  (call-interactively #'mc/mark-all-in-region-regexp))
+
 ;;   .        any character (but newline)
 ;;   *        previous character or group, repeated 0 or more time
 ;;   +        previous character or group, repeated 1 or more time

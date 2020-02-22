@@ -329,3 +329,7 @@
 
 ;; dired 模式:
 ;; = dired C-x C-q => 修改文件名 可以用mutil-c => C-x C-s
+
+;; TODO: 写很多Clojure的宏出来,写Elisp就像写clojure一样
+;; https://github.com/plexus/a.el ;;
+;; (a-get (a-list :foo 5 :bar 6) :foo) ;;=> 5
