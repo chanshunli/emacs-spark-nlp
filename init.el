@@ -36,7 +36,8 @@
         wgrep-ag
         request
         ripgrep
-        esup))
+        esup
+        company-tabnine))
 
 (package-initialize)
 
@@ -331,6 +332,7 @@
 (require 'jim-clj-alias)
 (require 'jim-r-lisp)
 (require 'jim-scaffold)
+(require 'jim-tabnine)
 ;; === 配置结束 ===
 
 (global-set-key (kbd "C-c v") 'jw-eval-or-clear-buffer)
