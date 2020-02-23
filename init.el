@@ -269,6 +269,7 @@
  (lambda ()
    (interactive)
    (switch-to-buffer "*scratch*")
+   (setq default-directory "/")
    (counsel-projectile-find-file)))
 
 ;; 可以ag查其他项目: 多项目切换方便一些,不用先打开一个文件在ag一下
@@ -277,6 +278,7 @@
  (lambda ()
    (interactive)
    (switch-to-buffer "*scratch*")
+   (setq  default-directory "/")
    (call-interactively #'counsel-projectile-ag)))
 
 ;; M-x describe-variable => `C-h v` 除了函数名字补全`C-h f`,键位名`C-h k`, 就是相关变量查询学习一个库的使用(源码式的学习)
