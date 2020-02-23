@@ -358,3 +358,5 @@
    (t (self-insert-command (or arg 1)))))
 
 (global-set-key "%" 'match-paren)
+
+;; TODO: 通过选择多次来加载多个参数: 中间还可以放入一个列表来输入就像C-x f先输入目录(read-sting选一个目录列表?),马上就输入ag的关键词
