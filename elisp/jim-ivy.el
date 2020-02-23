@@ -20,5 +20,12 @@
 ;;  (let ((choices '("cat" "dog" "dragon" "tiger")))
 ;;    (message "%s" (ido-completing-read "Open bookmark:" choices ))))
 
+;; https://github.com/abo-abo/swiper/issues/336
+;; (ivy-read "Junk file: " :initial-input rel-fname
+(global-set-key
+ (kbd "C-s")
+ (lambda ()
+   (interactive)
+   (swiper (thing-at-point 'word))))
 
 (provide 'jim-ivy)

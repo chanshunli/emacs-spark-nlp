@@ -162,7 +162,7 @@
 (define-key global-map (kbd "C-c C-q") 'projectile-kill-buffers)
 
 ;; M-> & M-< 跳到最后;;*
-(global-set-key (kbd "C-c m") 'end-of-buffer)
+(global-set-key (kbd "C-c m") 'end-of-buffer) ;; C-M-SPC
 (global-set-key (kbd "M-g") 'goto-line)
 ;; "M-@"的当前选择光标开始选择
 (global-set-key (kbd "M-2") 'set-mark-command)
