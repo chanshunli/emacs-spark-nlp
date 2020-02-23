@@ -37,7 +37,8 @@
         request
         ripgrep
         esup
-        company-tabnine))
+        company-tabnine
+        emmet-mode))
 
 (package-initialize)
 
@@ -334,6 +335,7 @@
 (require 'jim-scaffold)
 (require 'jim-tabnine)
 (require 'jim-yasnipet)
+(require 'jim-emmet)
 ;; === 配置结束 ===
 
 (global-set-key (kbd "C-c v") 'jw-eval-or-clear-buffer)
