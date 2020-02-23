@@ -333,12 +333,13 @@
 (require 'jim-r-lisp)
 (require 'jim-scaffold)
 (require 'jim-tabnine)
+(require 'jim-yasnipet)
 ;; === 配置结束 ===
 
 (global-set-key (kbd "C-c v") 'jw-eval-or-clear-buffer)
 
 ;; dired 模式:
-;; = dired C-x C-q => 修改文件名 可以用mutil-c => C-x C-s
+;; = dired C-x C-q => 修改文件名 可以用mutil-c => C-x C-s 或者 C-c C-c
 
 ;; TODO: 写很多Clojure的宏出来,写Elisp就像写clojure一样
 ;; https://github.com/plexus/a.el ;;
