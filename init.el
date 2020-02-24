@@ -348,5 +348,3 @@
 ;; TODO: 写很多Clojure的宏出来,写Elisp就像写clojure一样
 ;; https://github.com/plexus/a.el ;;
 ;; (a-get (a-list :foo 5 :bar 6) :foo) ;;=> 5
-
-(add-hook 'clojure-mode-hook 'lispy-mode)
