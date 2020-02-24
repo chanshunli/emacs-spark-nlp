@@ -147,4 +147,39 @@ overlay."
 ;; 3. https://github.com/company-mode/company-mode/wiki/Writing-backends
 (add-to-list 'company-backends #'company-code-search-backend)
 
+;; -------- 输入关键词之后的补全 ----------
+(defvar company-code-search-advanced-keywords
+  '(("foo" "overload 1") ("foo" "overload 2") ("bar" "method 1")))
+
+(defun company-code-search-advanced--make-candidate (candidate)
+  (let ((text (car candidate))
+        (meta (cadr candidate)))
+    (propertize text 'meta meta)))
+
+(defun company-code-search-advanced--candidates (prefix)
+  (let (res)
+    (dolist (item company-code-search-advanced-keywords)
+      (when (string-prefix-p prefix (car item))
+        (push (company-code-search-advanced--make-candidate item) res)))
+    res))
+
+(defun company-code-search-advanced--meta (candidate)
+  (format "This will use %s of %s"
+          (get-text-property 0 'meta candidate)
+          (substring-no-properties candidate)))
+
+(defun company-code-search-advanced--annotation (candidate)
+  (format " (%s)" (get-text-property 0 'meta candidate)))
+
+(defun company-code-search-advanced (command &optional arg &rest ignored)
+  (interactive (list 'interactive))
+  (cl-case command
+    (interactive (company-begin-backend 'company-code-search-advanced))
+    (prefix (company-grab-symbol-cons "\\.\\|->|-a>" 2))
+    (candidates (company-code-search-advanced--candidates arg))
+    (annotation (company-code-search-advanced--annotation arg))
+    (meta (company-code-search-advanced--meta arg))))
+
+;; (add-to-list 'company-backends #'company-code-search-advanced)
+
 (provide 'code-search)

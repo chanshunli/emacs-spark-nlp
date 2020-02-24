@@ -338,7 +338,7 @@
 (require 'jim-clj-alias)
 (require 'jim-r-lisp)
 (require 'jim-scaffold)
-;; (require 'jim-tabnine)
+(require 'jim-tabnine)
 (require 'jim-yasnipet)
 (require 'jim-emmet)
 (require 'jim-ivy)
