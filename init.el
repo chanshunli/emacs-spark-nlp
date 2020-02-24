@@ -152,7 +152,7 @@
 ;; 需要在*scratch*的buffer下才能执行成功 # 搜索中文需要加一个空格在中文词后面
 ;; (define-key global-map (kbd "C-x C-a") 'counsel-projectile-ag)
 (global-set-key
- (kbd "C-x C-a")
+ (kbd "C-x C-a") ;; 这个键在elisp下面没有用,被覆盖了
  (lambda ()
    (interactive)
    (call-interactively #'counsel-projectile-ag)))
@@ -275,6 +275,7 @@
    (counsel-projectile-find-file)))
 
 ;; 可以ag查其他项目: 多项目切换方便一些,不用先打开一个文件在ag一下
+;; TODO加一个选项,选择编程语言进行ag # 用一个语言的companing-read选择
 (global-set-key
  (kbd "C-x f")
  (lambda ()

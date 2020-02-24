@@ -97,9 +97,16 @@
 ;; ## C-g 推出终端
 ;; k是checkout文件
 ;; r u 是rebase命令,去掉中间的多余merge的commit
-(defun gs ()
+(defun gs (&optional project)
   (interactive)
-  (magit-status))
+  (if (y-or-n-p "是否git当前目录?")
+      (magit-status)
+    (ivy-read "Switch to git project:"
+              (projectile-relevant-known-projects)
+              :action
+              (lambda (project)
+                (message (format "Switched in git project: %s"   project))
+                (magit-status project)))))
 
 (defun clj-pom ()
   (interactive)
