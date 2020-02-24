@@ -6,6 +6,6 @@
 
 ;; 如果有projectile的话，这个能自动把 project root/.yas/ 里面的模板加进来
 ;; 比如 .yas/clojure-mode/xxx
-(add-hook 'yas-minor-mode-hook #'user/yas-load-local-snippets)
+;; (add-hook 'yas-minor-mode-hook #'user/yas-load-local-snippets)
 
 (provide 'jim-yasnipet)
