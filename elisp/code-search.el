@@ -130,4 +130,21 @@ overlay."
                            (not truncate-lines)))
               o)))))))
 
+(require 'cl-lib)
+
+(defun company-code-search-backend (command &optional arg &rest ignored)
+  (interactive (list 'interactive))
+  (cl-case command
+    (interactive (company-begin-backend 'company-code-search-backend))
+    (prefix (when (looking-back "foo\\>")
+              (match-string 0)))
+    (candidates (when (equal arg "foo")
+                  (list "foobar" "foobaz" "foobarbaz")))
+    (meta (format "This value is named %s" arg))))
+
+;; 1. 看看当前激活的是什么 company-backends C-h v
+;; 2. 然后自己写一个company-backend或者使用已有的backend，并添加到company-backends中
+;; 3. https://github.com/company-mode/company-mode/wiki/Writing-backends
+(add-to-list 'company-backends #'company-code-search-backend)
+
 (provide 'code-search)
