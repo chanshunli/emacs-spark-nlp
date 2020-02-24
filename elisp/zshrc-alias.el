@@ -110,11 +110,16 @@
 ;; r u 是rebase命令,去掉中间的多余merge的commit
 (defun gs (&optional project)
   (interactive)
-  (if (y-or-n-p "是否git当前目录?")
-      (magit-status)
-    (switch-to-git-projects
-     (lambda (project)
-       (magit-status project)))))
+  (let* ((switch-fn
+          (lambda ()
+            (switch-to-git-projects
+             (lambda (project)
+               (magit-status project))))))
+    (if (is-scratch?)
+        (funcall switch-fn)
+      (if (y-or-n-p "是否git当前目录?")
+          (magit-status)
+        (funcall switch-fn)))))
 
 (defun clj-pom ()
   (interactive)
