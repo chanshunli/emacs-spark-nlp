@@ -2,6 +2,8 @@
 
 ;; https://github.com/smihica/emmet-mode
 
+;; 输入view.abc => M-RET => ` <view class="abc"></view> `
+
 (use-package emmet-mode
   :hook (mhtml-mode nxml-mode css-mode)
   :bind

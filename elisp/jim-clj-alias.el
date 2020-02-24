@@ -20,4 +20,17 @@
   (interactive)
   (eval-clj-code "(.clear js/localStorage)"))
 
+(defun is-comp? ()
+  "判断一个React组件引用是否正确: util模式 => 元解释器模式开发"
+  (interactive)
+  (let*
+      ((code (format
+              "(try [(reagent.debug/assert-some %s \"Component\")] (catch :default e \"这不是一个React组件\"))"
+              (thing-at-point 'symbol))))
+    (let*
+        ((res (format "%s" (eval-clj-code code))))
+      (if (string= res "[nil]")
+          (message "这是一个React组件")
+        (message res)))))
+
 (provide 'jim-clj-alias)
