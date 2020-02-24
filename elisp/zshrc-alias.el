@@ -10,6 +10,17 @@
 ;; (company-posframe-mode 1)
 ;; C-c C-c执行顶级表达式:忽略掉(comment (+ 1 2))
 
+(defun is-scratch? ()
+  (string= "/" default-directory))
+
+(defun switch-to-git-projects (op-fn)
+  (ivy-read "Switch to git project:"
+            (projectile-relevant-known-projects)
+            :action
+            (lambda (project)
+              (message (format "Switched in git project: %s"   project))
+              (funcall op-fn project))))
+
 (defun cag ()
   (interactive)
   (call-interactively #'counsel-projectile-ag))
@@ -21,7 +32,12 @@
 ;; 在Emacs启动的mutil-term是zsh # 在外面终端启动的是closh
 (defun zsh ()
   (interactive)
-  (vterm))
+  (if (y-or-n-p "在当前打开目录?")
+      (vterm)
+    (switch-to-git-projects
+     (lambda (project)
+       (setq default-directory project)
+       (vterm)))))
 
 ;; 定时做减法是整理的艺术
 (defun vv ()
@@ -80,11 +96,6 @@
   (interactive)
   (call-interactively #'save-some-buffers))
 
-(defun cd-pro ()
-  "TODO: 按键C-d之后就弹出一个经常去的目录的列表,选择vterm去的目录"
-  (interactive)
-  nil)
-
 ;; M-x magit-status => #  按下修改的文件就会打印出来
 ;; ## git add # s
 ;; ### commmit # cc
@@ -101,12 +112,9 @@
   (interactive)
   (if (y-or-n-p "是否git当前目录?")
       (magit-status)
-    (ivy-read "Switch to git project:"
-              (projectile-relevant-known-projects)
-              :action
-              (lambda (project)
-                (message (format "Switched in git project: %s"   project))
-                (magit-status project)))))
+    (switch-to-git-projects
+     (lambda (project)
+       (magit-status project)))))
 
 (defun clj-pom ()
   (interactive)
