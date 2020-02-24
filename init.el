@@ -148,6 +148,10 @@
 (projectile-global-mode 1)
 
 ;; steve
+(defmacro comment (&rest body)
+  "Comment out one or more s-expressions."
+  nil)
+
 (define-key global-map (kbd "C-x C-o") 'counsel-projectile-switch-project)
 ;; 需要在*scratch*的buffer下才能执行成功 # 搜索中文需要加一个空格在中文词后面
 ;; (define-key global-map (kbd "C-x C-a") 'counsel-projectile-ag)
