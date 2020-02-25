@@ -23,15 +23,13 @@
       (lambda (connection)
         (when ns-form
           (cider-repl--cache-ns-form ns-form connection))
-        (cider-request:load-file (cider--file-string filename)
-                                 (funcall cider-to-nrepl-filename-function
-                                          (cider--server-filename filename))
-                                 (file-name-nondirectory filename)
-                                 connection)))))
+        (cider-request:load-file
+         (cider--file-string filename)
+         (funcall cider-to-nrepl-filename-function
+                  (cider--server-filename filename))
+         (file-name-nondirectory filename)
+         connection)))))
 
-(add-hook 'cider-connected-hook
-          (lambda ()
-            (cider-load-file "postwalk_editer.clj")))
 
 (defun eval-nrepl-clojure (str &optional namespace)
   (nrepl-sync-request:eval
@@ -44,6 +42,10 @@
 
 (defun start-postwalk-editer ()
   (interactive)
-  (call-interactively cider-connect-method))
+  (progn
+    (call-interactively cider-connect-method)
+    (add-hook 'cider-connected-hook
+              (lambda ()
+                (cider-load-file "postwalk_editer.clj")))))
 
 (provide 'jim-postwalk-editer)
