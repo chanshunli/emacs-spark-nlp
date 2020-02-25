@@ -345,6 +345,7 @@
 (require 'jim-ivy)
 (require 'jim-process)
 (require 'jim-markdown)
+(require 'jim-postwalk-editer)
 ;; === 配置结束 ===
 
 (global-set-key (kbd "C-c v") 'jw-eval-or-clear-buffer)
