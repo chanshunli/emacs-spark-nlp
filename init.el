@@ -38,7 +38,8 @@
         ripgrep
         esup
         company-tabnine
-        emmet-mode))
+        emmet-mode
+        markdown-mode))
 
 (package-initialize)
 
@@ -343,6 +344,7 @@
 (require 'jim-emmet)
 (require 'jim-ivy)
 (require 'jim-process)
+(require 'jim-markdown)
 ;; === 配置结束 ===
 
 (global-set-key (kbd "C-c v") 'jw-eval-or-clear-buffer)
