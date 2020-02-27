@@ -35,9 +35,19 @@
          (end-p
           (region-end))
          (new-stri
-          (replace-regexp-in-string
-           "div" "view"
-           (get-mark-content (current-buffer)))))
+          (->>
+           (get-mark-content (current-buffer))
+           (replace-regexp-in-string
+            "div" "view")
+           (replace-regexp-in-string
+            "\"[A-Za-z| |0-9|-]+\""
+            (lambda (s)
+              (save-match-data
+                (print s)
+                (concat "\""
+                        (call-clj-get-class-names-styles
+                         (replace-regexp-in-string "\"" "" s))
+                        "\"")))))))
     (progn
       ;; 1.替换为view的标签名字
       (kill-region bein-p end-p)
