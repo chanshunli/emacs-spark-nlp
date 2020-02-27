@@ -96,13 +96,14 @@
        ;; (print s);;=> "[[http://link][description]]"
        (nth 2 (split-string s "[\]\[]+")))) string))
 
-(defun rem->rpx ()
+(defun rem-to-rpx ()
+  (interactive)
   (replace-regexp-in-string
-   "\\([0-9]+\\)rem"
+   "\\([0-9|\\.]+\\)rem"
    (lambda (s)
      (save-match-data
        (print s)
-       (format "%drpx" (* 40 (string-to-number (replace-regexp-in-string "rem" "" s))))))
+       (format "%drpx" (* 35 (string-to-number (replace-regexp-in-string "rem" "" s))))))
    (get-mark-content (current-buffer))))
 
 (defun replace-rem->rpx ()
@@ -111,7 +112,7 @@
           (region-beginning))
          (end-p
           (region-end))
-         (new-stri (rem->rpx)))
+         (new-stri (rem-to-rpx)))
     (progn
       (kill-region bein-p end-p)
       (insert new-stri))))
