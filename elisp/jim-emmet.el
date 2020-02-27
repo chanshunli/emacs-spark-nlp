@@ -45,4 +45,8 @@
       ;; 2.格式化
       (sgml-pretty-print bein-p (point)))))
 
+;; 将class的名称翻译为行内样式的内容,避免再自己一个个重新找
+;; class name to inline style => Replacing class styles with inline styles
+;; document.styleSheets[0].cssRules
+
 (provide 'jim-emmet)
