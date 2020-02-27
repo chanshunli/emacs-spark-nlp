@@ -68,4 +68,20 @@
       "(biancheng-common.util/get-class-names-styles \"%s\")"
       class-name))))
 
+;; M-x replace-regexp Replace regexp (default \(.*\) → \,(call-clj-get-class-names-styles \1)):
+
+(defun match-underscore ()
+  "return matched text with underscore replaced by space."
+  (replace-regexp-in-string "_" " " (match-string 1)))
+
+;; (flatten-string-with-links "this is a [[http://link][description]]")
+;; => "this is a description"
+(defun flatten-string-with-links (string)
+  (replace-regexp-in-string
+   "\\[\\[[a-zA-Z:%@/\.]+\\]\\[[a-zA-Z:%@/\.]+\\]\\]"
+   (lambda (s)
+     (save-match-data
+       ;; (print s);;=> "[[http://link][description]]"
+       (nth 2 (split-string s "[\]\[]+")))) string))
+
 (provide 'jim-emmet)
