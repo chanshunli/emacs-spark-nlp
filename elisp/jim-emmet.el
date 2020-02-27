@@ -96,4 +96,24 @@
        ;; (print s);;=> "[[http://link][description]]"
        (nth 2 (split-string s "[\]\[]+")))) string))
 
+(defun rem->rpx ()
+  (replace-regexp-in-string
+   "\\([0-9]+\\)rem"
+   (lambda (s)
+     (save-match-data
+       (print s)
+       (format "%drpx" (* 40 (string-to-number (replace-regexp-in-string "rem" "" s))))))
+   (get-mark-content (current-buffer))))
+
+(defun replace-rem->rpx ()
+  (interactive)
+  (let* ((bein-p
+          (region-beginning))
+         (end-p
+          (region-end))
+         (new-stri (rem->rpx)))
+    (progn
+      (kill-region bein-p end-p)
+      (insert new-stri))))
+
 (provide 'jim-emmet)
