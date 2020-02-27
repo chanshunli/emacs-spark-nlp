@@ -40,13 +40,15 @@
            (replace-regexp-in-string
             "div" "view")
            (replace-regexp-in-string
-            "\"[A-Za-z| |0-9|-]+\""
+            "class=\"[A-Za-z| |0-9|-]+\""
             (lambda (s)
               (save-match-data
-                (print s)
-                (concat "\""
+                (print (concat "替换class: " s))
+                (concat "style=\""
                         (call-clj-get-class-names-styles
-                         (replace-regexp-in-string "\"" "" s))
+                         (replace-regexp-in-string
+                          "class=" ""
+                          (replace-regexp-in-string "\"" "" s)))
                         "\"")))))))
     (progn
       ;; 1.替换为view的标签名字
