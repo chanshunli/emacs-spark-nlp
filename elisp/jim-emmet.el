@@ -117,4 +117,22 @@
       (kill-region bein-p end-p)
       (insert new-stri))))
 
+(defun join-two-styles ()
+  (interactive)
+  (let* ((bein-p
+          (region-beginning))
+         (end-p
+          (region-end))
+         (splits (split-string
+                  (get-mark-content (current-buffer))
+                  "\""))
+         (new-stri (concat
+                    "style=\""
+                    (nth 1 splits)
+                    (nth 3 splits)
+                    "\"")))
+    (progn
+      (kill-region bein-p end-p)
+      (insert new-stri))))
+
 (provide 'jim-emmet)
