@@ -64,5 +64,57 @@
        nil file))))
 ;; ------------ mysql 的 增减字段的sql 生成 --------------- end -------
 
+;; --------- 小程序的代码生成 --------- start ------
+(defun mini-pro-js ()
+  "
+Page({
+  data: {
+    title: 0
+  },
+  onLoad: function () {
+    this.setData({
+      title: \"test\"
+    })
+  }
+})
+")
+
+(defun mini-pro-json (title)
+  (format
+   "
+{
+  \"navigationBarTitleText\": \"%s\",
+  \"usingComponents\": {}
+}
+" title))
+
+(defun mini-pro-wxss ()
+  "
+.container-update {
+    padding: 100rpx 0;
+}
+")
+
+(defun mini-pro-wxml ()
+  "
+<view class=\"container container-update\">
+</view>
+")
+
+(defun generate-miniprogram-files (title name)
+  (interactive "sTitle:\nsName")
+  (let* (;; (title "我的")
+         ;; (name "personal")
+         (js (mini-pro-js))
+         (json (mini-pro-json title))
+         (wxml (mini-pro-wxml))
+         (wxss (mini-pro-wxss))
+         (path (concat (vc-root-dir) "pages/" name "/")))
+    (progn
+      (make-directory path)
+      (write-region js nil (concat path name ".js"))
+      (write-region json nil (concat path name ".json"))
+      (write-region wxml nil (concat path name ".wxml"))
+      (write-region wxss nil (concat path name ".wxss")))))
 
 (provide 'jim-scaffold)
