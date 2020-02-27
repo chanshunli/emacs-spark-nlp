@@ -19,4 +19,30 @@
 (use-package css-mode
   :mode ("\\.wxss\\'" . css-mode))
 
+(defun get-mark-content (buffername)
+  (with-current-buffer
+      buffername
+    (buffer-substring-no-properties
+     (region-beginning)
+     (region-end))))
+
+;; 小程序的: div 换为 view
+;;  replace-string div 换为 view => (sgml-pretty-print BEG END) 格式化
+(defun replace-div->view ()
+  (interactive)
+  (let* ((bein-p
+          (region-beginning))
+         (end-p
+          (region-end))
+         (new-stri
+          (replace-regexp-in-string
+           "div" "view"
+           (get-mark-content (current-buffer)))))
+    (progn
+      ;; 1.替换为view的标签名字
+      (kill-region bein-p end-p)
+      (insert new-stri)
+      ;; 2.格式化
+      (sgml-pretty-print bein-p (point)))))
+
 (provide 'jim-emmet)
