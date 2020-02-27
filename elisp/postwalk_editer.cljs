@@ -22,9 +22,11 @@
 ;; (get-class-names-styles "flex flex-row h3 pa3 f4")
 ;; => ("display: flex;" "flex-direction: row;" "height: 4rem;" "padding: 1rem;" "font-size: 1.25rem;")
 (defn get-class-names-styles [class-stri]
-  (map (fn [css-name]
-         (clojure.string/replace
-           (find-class-name-style css-name)
-           #".(.*) \{ (.*) \}"
-           "$2"))
-    (clojure.string/split class-stri #" ")))
+  (->>
+    (clojure.string/split class-stri #" ")
+    (map (fn [css-name]
+           (clojure.string/replace
+             (find-class-name-style css-name)
+             #".(.*) \{ (.*) \}"
+             "$2")))
+    (clojure.string/join "")))

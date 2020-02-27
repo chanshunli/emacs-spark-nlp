@@ -49,4 +49,23 @@
 ;; class name to inline style => Replacing class styles with inline styles
 ;; document.styleSheets[0].cssRules
 
+(defun get-cljs-cider-buffer ()
+  (->>
+   (buffer-list)
+   (-filter
+    (lambda (buffer)
+      (string-match
+       "\\(.*\\)cider\\(.*\\)cljs\\(.*\\)"
+       (buffer-name buffer))))
+   first))
+
+;; 用mutil-cursors来选中编辑
+;; (call-clj-get-class-names-styles "w-100")
+(defun call-clj-get-class-names-styles (class-name)
+  (with-current-buffer (get-cljs-cider-buffer)
+    (eval-clj-code
+     (format
+      "(biancheng-common.util/get-class-names-styles \"%s\")"
+      class-name))))
+
 (provide 'jim-emmet)
