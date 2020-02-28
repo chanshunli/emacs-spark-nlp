@@ -1,6 +1,6 @@
 ## Emacs 流式编辑器: EmacsSpark, 只要编辑代码的`数据源头`,其他的自动编辑都是它变化的映射编辑
 
-*思想*
+*自我设计思想*
 
 * 运用运行时的cider来Postwalk修改代码本身(专门弄一个clojure前后端库[postwalk-editer](https://github.com/chanshunli/postwalk-editer)来支持流式编辑)
 * 结合yasnippet的使用
