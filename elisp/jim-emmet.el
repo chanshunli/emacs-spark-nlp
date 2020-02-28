@@ -8,7 +8,8 @@
   :hook (mhtml-mode nxml-mode css-mode)
   :bind
   (:map emmet-mode-keymap
-        ("M-RET" . 'emmet-expand-line))
+        ("M-RET" . 'emmet-expand-line)
+        ("M-j" . 'join-two-styles))
   :init
   (add-hook 'mhtml-mode-hook 'emmet-mode)
   (add-hook 'mhtml-mode-hook 'smartparens-mode))
@@ -140,5 +141,10 @@
     (progn
       (kill-region bein-p end-p)
       (insert new-stri))))
+
+;; 小程序和html的语法兼容表
+;; 1. img => <image> </image>
+;; 2. input => <input />
+;; 3. 两个style自动合并的问题
 
 (provide 'jim-emmet)
