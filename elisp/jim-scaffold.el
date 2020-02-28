@@ -115,6 +115,8 @@ Page({
       (write-region js nil (concat path name ".js"))
       (write-region json nil (concat path name ".json"))
       (write-region wxml nil (concat path name ".wxml"))
-      (write-region wxss nil (concat path name ".wxss")))))
+      (write-region wxss nil (concat path name ".wxss"))
+      ;; 在app.json处执行这个命令,就能插入到页面路由里面了: TODO => 可以自动打开app.json, re-search跳转到对应代码位置, 后执行这个命令 # 向rails的erikhuda/thor学习
+      (insert (format "\"pages/%s/%s\"," name name )))))
 
 (provide 'jim-scaffold)

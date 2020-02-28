@@ -96,14 +96,20 @@
        ;; (print s);;=> "[[http://link][description]]"
        (nth 2 (split-string s "[\]\[]+")))) string))
 
+(comment
+ (replace-regexp-in-string
+  "\\([0-9|\\.]+\\)r?em"
+  "\\1"
+  "10em"))
+
 (defun rem-to-rpx ()
   (interactive)
   (replace-regexp-in-string
-   "\\([0-9|\\.]+\\)rem"
+   "\\([0-9|\\.]+\\)r?em"
    (lambda (s)
      (save-match-data
        (print s)
-       (format "%drpx" (* 35 (string-to-number (replace-regexp-in-string "rem" "" s))))))
+       (format "%drpx" (* 35 (string-to-number (replace-regexp-in-string "rem|em" "" s))))))
    (get-mark-content (current-buffer))))
 
 (defun replace-rem->rpx ()
