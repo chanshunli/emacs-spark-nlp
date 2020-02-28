@@ -1,4 +1,18 @@
 
+(comment
+ (set-process-sentinel
+  (start-process "sleep" "*sleep*" "sleep" "3")
+  (lambda (_process event)
+    (when (string= event "finished\n")
+      (message "TODO Do something"))))
+
+ (make-process
+  :name "sleep test"
+  :command (list "sleep" " 3")
+  :sentinel (lambda (proc event) (message "done!"))
+  :buffer "*sleep test*")
+ )
+
 ;; (my-make-process-call "ls") ;;可以工作的
 ;; (my-make-process-call "mytail") # `tail -f  /Users/clojure/PytorchPro/pytorch/README.md `
 (defun my-make-process-call (program &rest args)
