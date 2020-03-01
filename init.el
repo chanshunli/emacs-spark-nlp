@@ -39,7 +39,9 @@
         esup
         company-tabnine
         emmet-mode
-        markdown-mode))
+        markdown-mode
+        prescient
+        ivy-prescient))
 
 (package-initialize)
 
@@ -61,7 +63,8 @@
 (add-hook 'prog-mode-hook 'company-mode)
 
 ;;(helm-mode 1)
-(ivy-mode 1)
+;; (ivy-mode 1);; 现在的M-x的列表是ivy的列表: 不能按照历史来排序
+(ivy-prescient-mode 1)
 
 (counsel-projectile-mode 1)
 
