@@ -63,7 +63,7 @@
 (add-hook 'prog-mode-hook 'company-mode)
 
 ;;(helm-mode 1)
-;; (ivy-mode 1);; 现在的M-x的列表是ivy的列表: 不能按照历史来排序
+(ivy-mode 1) ;; 现在的M-x的列表是ivy的列表: 不能按照历史来排序
 (ivy-prescient-mode 1)
 
 (counsel-projectile-mode 1)
