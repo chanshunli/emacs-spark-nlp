@@ -99,4 +99,4 @@ If BUFFER is nil, `princ' is used to forward its stdout+stderr."
      (lambda ()
        (npm-build-my-mini-pro version)))))
 
-(Provide 'jim-process)
+(provide 'jim-process)

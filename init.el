@@ -253,6 +253,9 @@
       (hs-hide-block))))
 (add-hook 'clojure-mode-hook 'user/clojure-hide-comment)
 
+;; Emacs也用了comment宏
+(add-hook 'emacs-lisp-mode-hook 'user/clojure-hide-comment)
+
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
