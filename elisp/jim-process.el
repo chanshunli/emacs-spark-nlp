@@ -29,10 +29,11 @@
   :buffer "*test1*")
 
  ;; 如果直接写lambda,会获取不到op-fn的定义 => 会有op-fn 为空的错误
- (let* ((op-fn (lambda () (message "call the fn"))))
+ (let* ((time "3")
+        (op-fn (lambda () (message "call the fn"))))
    (make-process
     :name "sleep test"
-    :command (list "sleep" "3")
+    :command (list "sleep" time)
     :sentinel `(lambda (proc event)
                  (message "done!")
                  (funcall ,op-fn))
@@ -66,7 +67,7 @@ If BUFFER is nil, `princ' is used to forward its stdout+stderr."
    :command (list "/usr/local/bin/npm_push_mini_cljs" version)
    :sentinel `(lambda (proc event)
                 (message "finished push the mini-program-cljs!")
-                (funcall ,success-fn))
+                (funcall ,success-fn ,version))
    :buffer "*mini-program-cljs # pushing mini-program-cljs*"))
 
 (comment
@@ -105,7 +106,7 @@ If BUFFER is nil, `princ' is used to forward its stdout+stderr."
                            (get-version-mini-pro-cljs))))))
     (push-mini-program-cljs
      version
-     (lambda ()
+     (lambda (version)
        (message "======")
        (npm-build-my-mini-pro version)))))
 
