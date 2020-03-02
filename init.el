@@ -249,7 +249,8 @@
 ;; C-2出来用法注释
 (defun user/clojure-hide-comment (&rest args)
   (save-mark-and-excursion
-    (while (search-forward "(comment" nil t)
+    (while (search-forward
+            (concat  "(" "comment") nil t)
       (hs-hide-block))))
 (add-hook 'clojure-mode-hook 'user/clojure-hide-comment)
 
