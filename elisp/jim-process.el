@@ -28,6 +28,15 @@
   :sentinel (lambda (proc event) (message "done!"))
   :buffer "*test1*")
 
+ ;; 如果直接写lambda,会获取不到op-fn的定义 => 会有op-fn 为空的错误
+ (let* ((op-fn (lambda () (message "call the fn"))))
+   (make-process
+    :name "sleep test"
+    :command (list "sleep" "3")
+    :sentinel `(lambda (proc event)
+                 (message "done!")
+                 (funcall ,op-fn))
+    :buffer "*sleep test*"))
  )
 
 ;; (my-make-process-call "ls") ;;可以工作的
@@ -55,10 +64,10 @@ If BUFFER is nil, `princ' is used to forward its stdout+stderr."
   (make-process
    :name "npm push mini-program-cljs"
    :command (list "/usr/local/bin/npm_push_mini_cljs" version)
-   :sentinel (lambda (proc event)
-               (message "finished push the mini-program-cljs!")
-               (funcall success-fn))
-   :buffer "*pushing mini-program-cljs*"))
+   :sentinel `(lambda (proc event)
+                (message "finished push the mini-program-cljs!")
+                (funcall ,success-fn))
+   :buffer "*mini-program-cljs # pushing mini-program-cljs*"))
 
 (comment
  (npm-build-my-mini-pro "0.2.4"))
@@ -69,7 +78,7 @@ If BUFFER is nil, `princ' is used to forward its stdout+stderr."
    :command (list "/usr/local/bin/npm_build_my_mini_pro" version)
    :sentinel (lambda (proc event)
                (message "finished npm_build_my_mini_pro!"))
-   :buffer "*npm_build_my_mini_pro*"))
+   :buffer "*mini-program-cljs # npm_build_my_mini_pro*"))
 
 (defun get-version-mini-pro-cljs ()
   (let*  ((stris
@@ -97,6 +106,7 @@ If BUFFER is nil, `princ' is used to forward its stdout+stderr."
     (push-mini-program-cljs
      version
      (lambda ()
+       (message "======")
        (npm-build-my-mini-pro version)))))
 
 (provide 'jim-process)
