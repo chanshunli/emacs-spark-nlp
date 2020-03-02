@@ -71,11 +71,32 @@ If BUFFER is nil, `princ' is used to forward its stdout+stderr."
                (message "finished npm_build_my_mini_pro!"))
    :buffer "*npm_build_my_mini_pro*"))
 
-(defun mini-pro-cljs-update (version)
-  (interactive "sVersion:")
-  (push-mini-program-cljs
-   version
-   (lambda ()
-     (npm-build-my-mini-pro version))))
+(defun get-version-mini-pro-cljs ()
+  (let*  ((stris
+           (->
+            "cat /Users/clojure/CljPro/wechat-clj/mini-program-cljs/package.json"
+            (shell-command-to-string)
+            (split-string "\n")))
+          (match-stri (format "%s"
+                              (-filter
+                               (lambda (x)
+                                 (string-match "\\(.*\\)version\\(.*\\)" x))
+                               stris))))
+    (replace-regexp-in-string
+     "\\(.*\\)\"version\": \"\\([0-9|\.]+\\)\"\\(.*\\)"
+     "\\2"
+     match-stri)))
 
-(provide 'jim-process)
+(defun mini-pro-cljs-update ()
+  (interactive)
+  (let* ((version
+          (format "%s"
+                  (read-string
+                   (format "Current version is %s:"
+                           (get-version-mini-pro-cljs))))))
+    (push-mini-program-cljs
+     version
+     (lambda ()
+       (npm-build-my-mini-pro version)))))
+
+(Provide 'jim-process)
