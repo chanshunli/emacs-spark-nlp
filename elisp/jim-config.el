@@ -11,6 +11,8 @@
 
 (setq cljs-buffer-name "")
 
+(setq is-jackj nil)
+
 ;; (get-cljs-buffer-name (get-cider-port))
 (defun get-cljs-buffer-name (port)
   (format "%s%s%s%s%s"
@@ -47,6 +49,7 @@
                        car)))
     (progn
       (message "Jack in cljs cider...")
+      (setq is-jackj t)
       (setq sibl-run "false")
       (open-cljs-file)
       (switch-to-buffer buffer-name)
@@ -66,10 +69,16 @@
         (with-current-buffer cljs-buffer-name
           (sibl))
         (find-file start-clj-file))
-    (message "sibl已经启动")))
+    (message "sibl已经启动"))
+  (setq is-jackj nil))
 
 ;; 把 DO1 2 3 连起来,当启动第一步成功的时候启动第二步
-(add-hook 'cider-connected-hook 'siblj)
+;; (add-hook 'cider-connected-hook 'siblj)
+(add-hook 'cider-connected-hook
+          (lambda ()
+            (if is-jackj
+                (siblj)
+              (message "当前不是jack主clj和cljs项目"))))
 
 (defun get-mark-content (buffername)
   (with-current-buffer
