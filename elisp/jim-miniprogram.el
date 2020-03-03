@@ -1,4 +1,5 @@
-(setq miniprogram-project-path "")
+;; (setq miniprogram-project-path "")
+;; (setq miniprogram-file "")
 
 (require 'jim-env)
 
@@ -23,5 +24,17 @@
 
 (comment
  (open-cli-ws (lambda (x) (message x))))
+
+(defun miniprogram-jack ()
+  (interactive)
+  "TODO: 需要自己选node-repl"
+  (open-cli-ws
+   (lambda (x)
+     (progn
+       (find-file miniprogram-file)
+       (with-current-buffer "foo.cljs"
+         (push-it-real-good
+          "M-x" "cider-jack-in-cljs"
+          "<return>"))))))
 
 (provide 'jim-miniprogram)
