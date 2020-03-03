@@ -8,7 +8,7 @@
 ;;       'company-indent-or-complete-common)))
 ;; 补全列表的中文错位问题
 ;; (company-posframe-mode 1)
-;; C-c C-c执行顶级表达式:忽略掉(comment (+ 1 2))
+;; C-c C-c执行顶级表达式:忽略掉( comment (+ 1 2))
 
 (defun is-scratch? ()
   (string= "/" default-directory))
