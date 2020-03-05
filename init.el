@@ -41,7 +41,8 @@
         emmet-mode
         markdown-mode
         prescient
-        ivy-prescient))
+        ivy-prescient
+        clomacs))
 
 (package-initialize)
 
@@ -354,6 +355,7 @@
 (require 'jim-markdown)
 (require 'jim-postwalk-editer)
 (require 'jim-miniprogram)
+(require 'jim-mxnet)
 ;; === 配置结束 ===
 
 (global-set-key (kbd "C-c v") 'jw-eval-or-clear-buffer)
