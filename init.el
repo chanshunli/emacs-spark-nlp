@@ -355,7 +355,11 @@
 (require 'jim-markdown)
 (require 'jim-postwalk-editer)
 (require 'jim-miniprogram)
+
+;;------ 连接clojure和elisp的clomacs(包装了cider)
+(add-to-list 'load-path "~/.emacs.d/jim-mxnet/src/elisp/")
 (require 'jim-mxnet)
+;; 需要M-x jim-mxnet-mdarkdown-to-html才会打开nrepl
 ;; === 配置结束 ===
 
 (global-set-key (kbd "C-c v") 'jw-eval-or-clear-buffer)

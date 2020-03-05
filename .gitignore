@@ -21,3 +21,4 @@ elisp/jim-env.el
 .cpcache/
 .nrepl-port
 projectile.cache
+jim-mxnet/target
