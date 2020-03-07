@@ -7,4 +7,4 @@
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [markdown-clj "1.10.2"]
                  [clomacs "0.0.4-SNAPSHOT"]
-                 [cnuernber/libpython-clj "1.36"]])
+                 [clj-python/libpython-clj "1.37"]])
