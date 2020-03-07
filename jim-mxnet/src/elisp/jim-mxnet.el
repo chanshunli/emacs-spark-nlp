@@ -53,8 +53,10 @@
 
 (comment
  (jim-mxnet-get-word-vector "python") ;=> 输出词向量,但是两个参数,就不知道怎么定义对接了
- (jim-mxnet-dot-word "apple" "steve") ;=> Not enough arguments for format string
-;; => ;; =>
+ (jim-mxnet-dot-word "apple" "steve") ;=> Not enough arguments for format string => 没有找到的单词才会爆的错误
+
+ (jim-mxnet-dot-word "python" "tensorflow") ;;=> 429
+ ;; 因为看它的宏,就知道: defun ,el-func-name (&rest attributes) # 参数是不确定的
  )
 
 (provide 'jim-mxnet)
