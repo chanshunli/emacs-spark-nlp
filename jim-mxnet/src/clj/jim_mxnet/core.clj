@@ -1,4 +1,5 @@
 (ns jim-mxnet.core
+  (:require [jim-mxnet.tensorflow])
   (:use markdown.core
         clomacs))
 

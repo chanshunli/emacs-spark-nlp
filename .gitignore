@@ -22,3 +22,4 @@ elisp/jim-env.el
 .nrepl-port
 projectile.cache
 jim-mxnet/target
+.lein-repl-history

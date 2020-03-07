@@ -6,4 +6,5 @@
   :source-paths ["src/clj"]
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [markdown-clj "1.10.2"]
-                 [clomacs "0.0.4-SNAPSHOT"]])
+                 [clomacs "0.0.4-SNAPSHOT"]
+                 [cnuernber/libpython-clj "1.36"]])
