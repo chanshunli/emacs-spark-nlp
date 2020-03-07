@@ -43,6 +43,20 @@
                :doc "Get Emacs version with markdown strong marks."
                :httpd-starter 'jim-mxnet-httpd-start)
 
+(clomacs-defun jim-mxnet-dot-word
+               jim-mxnet.tensorflow/dot-word
+               :lib-name "jim-mxnet")
+
+(clomacs-defun jim-mxnet-get-word-vector
+               jim-mxnet.tensorflow/get-word-vector
+               :lib-name "jim-mxnet")
+
+(comment
+ (jim-mxnet-get-word-vector "python") ;=> 输出词向量,但是两个参数,就不知道怎么定义对接了
+ (jim-mxnet-dot-word "apple" "steve") ;=> Not enough arguments for format string
+;; => ;; =>
+ )
+
 (provide 'jim-mxnet)
 
 ;; (jim-mxnet-httpd-start)
