@@ -1,10 +1,13 @@
 (ns jim-mxnet.tensorflow
   (:require
+   [libpython-clj.require :refer [require-python]]
    [libpython-clj.python
     :refer
-    [import-module get-item get-attr python-type
+    [py. py.. py.-
+     import-module get-item get-attr python-type
      call-attr call-attr-kw att-type-map ->py-dict
      run-simple-string] :as py]
+   [tech.v2.datatype :as dtype]
    [clojure.pprint :as pp]))
 
 (defn init-libpy []
@@ -18,32 +21,30 @@
 
 (init-libpy)
 
-(defn py-import [module-name]
-  (import-module module-name))
-
-(defmacro $ [py-import-lib attr-name & args]
-  `(call-attr
-     ~py-import-lib  ~(str attr-name) ~@args))
-
-;; (-a> ($ np ones [2 3]) shape) ;; => (2, 3)
-(defmacro -a> [py-import-lib attr-name]
-  `(get-attr
-     ~py-import-lib  ~(str attr-name)))
-
-;; -------------
-
-(defonce np (import-module "numpy"))
-(defonce lmdb-reader (import-module "lmdb_embeddings.reader"))
+(require-python '[numpy :as np])
+(require-python '[lmdb_embeddings.reader :as lmdb-reader])
 
 (defonce embeddings
-  ($ lmdb-reader LmdbEmbeddingsReader
+  (py. lmdb-reader LmdbEmbeddingsReader
     "/Users/clojure/tensorflow-lmdb"))
 
-;;(get-word-vector "python")
+(comment
+  (get-word-vector "python")
+  (get-word-vector "pythonx"))
 (defn get-word-vector [word]
-  ($ embeddings get_word_vector word))
+  (try
+    (py. embeddings get_word_vector word)
+    (catch Exception e
+      (prn "当前词找不到向量")
+      nil)))
 
-;; (dot-word "matrix" "vector") ;;=> 164.7116241455078
-;; (dot-word "array" "deep") ;;=> -12.737825393676758
+(comment
+  (dot-word "matrix" "vector") ;;=> 164.7116241455078
+  (dot-word "array" "deep")    ;;=> -12.737825393676758
+  (dot-word "arrayx" "deep")   ;;=> 0
+  )
 (defn dot-word [w1 w2]
-  ($ np dot (get-word-vector w1) (get-word-vector w2)))
+  (let [[v1 v2] [(get-word-vector w1) (get-word-vector w2)] ]
+    (if (and v1 v2)
+      (py. np dot v1 v2)
+      0)))
