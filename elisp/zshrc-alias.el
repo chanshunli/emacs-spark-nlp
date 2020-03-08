@@ -135,6 +135,11 @@
   (interactive)
   (insert "\"#f8f8f8\""))
 
+(defun get-git-all-file ()
+  "git ls-files会显示出来二进制文件, 此命令全部是文本文件"
+  (interactive)
+  (shell-command-to-string "git grep --cached -Il ''"))
+
 ;; C-M-b #
 
 (provide 'zshrc-alias)
