@@ -22,10 +22,10 @@
 (init-libpy)
 
 (require-python '[numpy :as np])
-(require-python '[lmdb_embeddings.reader :as lmdb-reader])
+(require-python '[lmdb_embeddings.reader :refer [LmdbEmbeddingsReader]])
 
 (defonce embeddings
-  (py. lmdb-reader LmdbEmbeddingsReader
+  (LmdbEmbeddingsReader
     "/Users/clojure/tensorflow-lmdb"))
 
 (comment
@@ -46,5 +46,5 @@
 (defn dot-word [w1 w2]
   (let [[v1 v2] [(get-word-vector w1) (get-word-vector w2)] ]
     (if (and v1 v2)
-      (py. np dot v1 v2)
+      (np/dot v1 v2)
       0)))
