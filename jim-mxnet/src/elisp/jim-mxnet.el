@@ -70,6 +70,27 @@
 ;; 用机器学习的方法来优化用户使用体验
 ;; 还有可以使用专家系统来推断 ，根据历史来学习
 
+(defun run-in-vc-root (op-fn)
+  (let* ((old default-directory)
+         (-tmp  (setq default-directory (vc-root-dir))))
+    (let*  ((res (funcall op-fn)))
+      (progn
+        (setq default-directory old)
+        res))))
+
+(comment
+
+ ;; 两个都之输出一个文件
+ (shell-command-to-string "git grep --cached -Il ''")
+ (shell-command-to-string "git ls-files")
+
+ ;; 可以输出git想要的非banery的文件
+ (run-in-vc-root
+  (lambda ()
+    (shell-command-to-string "git grep --cached -Il ''")))
+ )
+
+
 (provide 'jim-mxnet)
 
 ;; (jim-mxnet-httpd-start)

@@ -1,5 +1,6 @@
 (ns jim-mxnet.tensorflow
   (:require
+   [clojure.java.shell :as shell]
    [libpython-clj.require :refer [require-python]]
    [libpython-clj.python
     :refer
@@ -81,3 +82,17 @@
   "两个序列的相似度: 当输入多个搜索词搜索代码时可以用来过滤掉一些低概率的序列"
   [seq1 seq2]
   (py. gensim-model wmdistance  seq1 seq2))
+
+(defn write-file
+  [{:keys [file-name content]}]
+  (with-open [out (clojure.java.io/output-stream file-name)]
+    (clojure.java.io/copy content out)))
+
+(comment
+  ;; 只显示了core.clj文件
+  (shell/sh
+    "git" "grep" "--cached" "-Il" "\"\"")
+
+  ;; 只是显示了project.clj的root下面的所有文件
+  (shell/sh
+    "git" "ls-files"))
