@@ -13,6 +13,7 @@
 (comment
  (jim-mxnet-httpd-start))
 (defun jim-mxnet-httpd-start ()
+  (interactive)
   (cl-flet ((clomacs-set-emacs-connection 'jim-mxnet-set-emacs-connection)
             (clomacs-require 'jim-mxnet-require))
     (clomacs-httpd-start)))
@@ -92,6 +93,7 @@
 
 (defun vc-text-file-name ()
   "word2vec训练需要的文本语料库,每个项目最多需要生成一个"
+  ;; (format "===%s" (vc-root-dir)) ;;=> clojure调用这行代码时, vc-root-dir返回为nil
   (format
    "%s.text8"
    (nth 1 (reverse (split-string (vc-root-dir) "/")))))
