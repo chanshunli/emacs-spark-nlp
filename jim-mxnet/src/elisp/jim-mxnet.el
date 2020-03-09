@@ -106,4 +106,10 @@
   ;;     (auto-complete))
   "aaaaa")
 
+(defun ejc-complete-auto-complete-2 (buffer-name point)
+  (switch-to-buffer buffer-name)
+  ;; (if (equal point (point))
+  ;;     (auto-complete))
+  "22222")
+
 (provide 'jim-mxnet)

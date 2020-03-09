@@ -124,12 +124,15 @@
   (clomacs-defn emacs-major-version clomacs-get-emacs-major-version)
   (emacs-major-version) ;;=> ""
 
-  (clomacs-defn
-    complete-auto-complete
-    ejc-complete-auto-complete)
-
+  ;; ----------
+  (clomacs-defn complete-auto-complete ejc-complete-auto-complete)
   ;; 成功跳转,并且插入了aaaa
-  (complete-auto-complete "jim-mxnet.el" 1))
+  (complete-auto-complete "jim-mxnet.el" 1)
+
+  ;; --------- 也成功了...
+  (clomacs-defn complete-auto-complete-2 ejc-complete-auto-complete-2)
+  ;; 成功跳转,并且插入了22222
+  (complete-auto-complete-2 "jim-mxnet.el" 1))
 
 (clomacs-defn emacs-version emacs-version)
 (defn prn-emacs-version []
