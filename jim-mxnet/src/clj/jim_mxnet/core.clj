@@ -62,3 +62,46 @@
       (throw (Exception. (format "Failed to load img: %s" img-path))))))
 
 ;; --------------------
+(require-python '[mxnet :refer [autograd nd] :as mx])
+
+(comment
+  (def x (-> nd
+           (py. arange 4)
+           (py. reshape [4 1])))
+
+  (py. x attach_grad)
+
+  (py/with [record (py. autograd record)]
+    (let [y (py. nd multiply 2
+              (py. nd dot (py.- x T) x))]
+      (py. y backward)))
+
+  (def dx (py.- x grad))
+  ;; =>
+  ;; [[ 0.]
+  ;;  [ 4.]
+  ;;  [ 8.]
+  ;;  [12.]]
+  ;; <NDArray 4x1 @cpu(0)>
+
+  ;; ----------------------------
+  ;;x = mx.nd.random.uniform(shape=(10,))
+  (def x1 (-> nd
+            (py.- random)
+            (py/call-attr-kw "uniform" [] {"shape" 10})))
+  ;; => [0.79172504 0.8121687  0.5288949  0.47997716 0.56804454 0.3927848
+  ;;     0.92559665 0.83607876 0.07103606 0.33739617]
+  ;;    <NDArray 10 @cpu(0)>
+
+  (py. x1 attach_grad)
+
+  (py/with [record (py. autograd record)]
+    (let [m (py. nd sigmoid x1)]
+      (py. m backward)))
+
+  (def dx1 (py.- x1 grad))
+  ;; => [0.21458015 0.21291625 0.23330082 0.2361367  0.23086983 0.24060014
+  ;;     0.20326573 0.21093895 0.24968489 0.24301809]
+  ;;    <NDArray 10 @cpu(0)>
+
+  )
