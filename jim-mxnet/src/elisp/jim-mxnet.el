@@ -103,10 +103,12 @@
  )
 
 (cl-defun ejc-complete-auto-complete (buffer-name point)
-  (switch-to-buffer buffer-name)
+  ;; (switch-to-buffer buffer-name)
   ;; (if (equal point (point))
   ;;     (auto-complete))
-  "aaaaa")
+  ;; "aaaaa"
+  (format "===%s" (vc-root-dir))
+  )
 
 (defun ejc-complete-auto-complete-2 (buffer-name point)
   (switch-to-buffer buffer-name)

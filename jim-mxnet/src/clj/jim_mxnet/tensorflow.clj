@@ -132,7 +132,22 @@
   ;; --------- 也成功了...
   (clomacs-defn complete-auto-complete-2 ejc-complete-auto-complete-2)
   ;; 成功跳转,并且插入了22222
-  (complete-auto-complete-2 "jim-mxnet.el" 1))
+  (complete-auto-complete-2 "jim-mxnet.el" 1)
+
+  (clomacs-eval "message" "\"111\"" true)
+  (clomacs-eval "message" "\"111\"" false)
+
+  (clomacs-eval "vc-root-dir" "()" false)
+
+  ;; (defun aaa (x) (+ x 100)) =>
+  (clomacs-eval "aaa" "(aaa 1)" false)
+  ;; => "101"
+
+  (clomacs-eval "aaax" "(aaa 1)" false) ;=> "101"
+
+  (clomacs-eval "aaaxdsa" "(format \"%s---\"(vc-root-dir))" true)
+;; => "nil---"
+  )
 
 (clomacs-defn emacs-version emacs-version)
 (defn prn-emacs-version []
