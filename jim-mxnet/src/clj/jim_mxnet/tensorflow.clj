@@ -9,7 +9,8 @@
      call-attr call-attr-kw att-type-map ->py-dict
      run-simple-string] :as py]
    [tech.v2.datatype :as dtype]
-   [clojure.pprint :as pp]))
+   [clojure.pprint :as pp])
+  (:use clomacs))
 
 (defn init-libpy []
   (do
@@ -95,4 +96,23 @@
 
   ;; 只是显示了project.clj的root下面的所有文件
   (shell/sh
-    "git" "ls-files"))
+    "git" "ls-files")
+
+  (clomacs-defn get-vc-all-git-files get-vc-all-git-files)
+  (get-vc-all-git-files) ;; => ""
+
+  (clomacs-defn vc-text-file-name vc-text-file-name)
+  (vc-text-file-name) ;; => ""
+  ;; Wrong type argument: stringp, nil
+  ;;   in wrapped Clojure->Elisp function: jim_mxnet.tensorflow$vc_text_file_name@40c0a4f4
+  ;;   elisp: (vc-text-file-name)
+  ;; => ""
+
+  (clomacs-defn vc-root-dir vc-root-dir)
+  (vc-root-dir);;=> ""
+
+  )
+
+(clomacs-defn emacs-version emacs-version)
+(defn prn-emacs-version []
+  (println (emacs-version)))

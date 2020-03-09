@@ -10,6 +10,8 @@
                clojure.core/require
                :lib-name "jim-mxnet")
 
+(comment
+ (jim-mxnet-httpd-start))
 (defun jim-mxnet-httpd-start ()
   (cl-flet ((clomacs-set-emacs-connection 'jim-mxnet-set-emacs-connection)
             (clomacs-require 'jim-mxnet-require))
@@ -80,6 +82,8 @@
         (setq default-directory old)
         res))))
 
+(comment
+ (get-vc-all-git-files))
 (defun get-vc-all-git-files ()
   "可以输出git想要的非banery的文件列表"
   (run-in-vc-root
