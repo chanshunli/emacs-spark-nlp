@@ -116,3 +116,15 @@
 (clomacs-defn emacs-version emacs-version)
 (defn prn-emacs-version []
   (println (emacs-version)))
+
+(clomacs-defn vc-root-dir vc-root-dir)
+(defn get-vc-root []
+  (vc-root-dir))
+
+(clomacs-defn get-vc-all-git-files get-vc-all-git-files)
+(defn get-vc-git-files []
+  (get-vc-all-git-files))
+
+(clomacs-defn vc-text-file-name vc-text-file-name)
+(defn get-vc-tex-file-name []
+  (vc-text-file-name))
