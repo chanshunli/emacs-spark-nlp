@@ -69,8 +69,10 @@
 ;; 所有搜索和排序的地方都可以用它来弄
 ;; 用机器学习的方法来优化用户使用体验
 ;; 还有可以使用专家系统来推断 ，根据历史来学习
+;; 讯飞的语音输入和打字输入的多模型迁移学习训练: 如何用产品本身的力量来生成标注数据,用迁移学习训练到你不具备的映射能力呢?
 
 (defun run-in-vc-root (op-fn)
+  "提供在vc-root环境下跑的环境"
   (let* ((old default-directory)
          (-tmp  (setq default-directory (vc-root-dir))))
     (let*  ((res (funcall op-fn)))
@@ -78,24 +80,20 @@
         (setq default-directory old)
         res))))
 
+(defun get-vc-all-git-files ()
+  "可以输出git想要的非banery的文件列表"
+  (run-in-vc-root
+   (lambda ()
+     (shell-command-to-string "git grep --cached -Il ''"))))
+
+(defun vc-text-file-name ()
+  "word2vec训练需要的文本语料库,每个项目最多需要生成一个"
+  (format
+   "%s.text8"
+   (nth 1 (reverse (split-string (vc-root-dir) "/")))))
+
 (comment
-
- ;; 两个都之输出一个文件
- (shell-command-to-string "git grep --cached -Il ''")
- (shell-command-to-string "git ls-files")
-
- ;; 可以输出git想要的非banery的文件
- (run-in-vc-root
-  (lambda ()
-    (shell-command-to-string "git grep --cached -Il ''")))
+ (append-to-file "xyz\n" nil "file.txt")
  )
 
-
 (provide 'jim-mxnet)
-
-;; (jim-mxnet-httpd-start)
-;; (add-to-list 'load-path "~/.emacs.d/jim-mxnet/src/elisp/")
-;; (require 'jim-mxnet)
-;; (jim-mxnet-md-to-html-wrapper "# This is a test")
-;; # This is a test
-;; (jim-mxnet-md-to-html-wrapper (jim-mxnet-strong-emacs-version))
