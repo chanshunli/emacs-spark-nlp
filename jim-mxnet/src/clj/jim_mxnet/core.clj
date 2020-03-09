@@ -64,13 +64,16 @@
 ;; --------------------
 (require-python '[mxnet :refer [autograd nd] :as mx])
 
+;; TODO函数: 输入向量变换函数输出它的梯度, 求控制流函数的梯度
 (comment
+  ;; x = nd.arange(4).reshape((4, 1))
   (def x (-> nd
            (py. arange 4)
            (py. reshape [4 1])))
 
   (py. x attach_grad)
 
+  ;; 2 * nd.dot(x.T, x)
   (py/with [record (py. autograd record)]
     (let [y (py. nd multiply 2
               (py. nd dot (py.- x T) x))]
@@ -95,6 +98,7 @@
 
   (py. x1 attach_grad)
 
+  ;; 求多分类控制流函数sigmoid的梯度
   (py/with [record (py. autograd record)]
     (let [m (py. nd sigmoid x1)]
       (py. m backward)))
