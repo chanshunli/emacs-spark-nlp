@@ -100,4 +100,10 @@
  (append-to-file "xyz\n" nil "file.txt")
  )
 
+(cl-defun ejc-complete-auto-complete (buffer-name point)
+  (switch-to-buffer buffer-name)
+  ;; (if (equal point (point))
+  ;;     (auto-complete))
+  "aaaaa")
+
 (provide 'jim-mxnet)

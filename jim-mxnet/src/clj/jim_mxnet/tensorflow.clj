@@ -116,7 +116,21 @@
 (comment
   ;; 需要在emacs里面启动这个才能用emacs-version
   ;; (jim-mxnet-httpd-start)
-  )
+
+  (clomacs-defn el-identity identity)
+  (el-identity 1)
+  ;; => "1"
+
+  (clomacs-defn emacs-major-version clomacs-get-emacs-major-version)
+  (emacs-major-version) ;;=> ""
+
+  (clomacs-defn
+    complete-auto-complete
+    ejc-complete-auto-complete)
+
+  ;; 成功跳转,并且插入了aaaa
+  (complete-auto-complete "jim-mxnet.el" 1))
+
 (clomacs-defn emacs-version emacs-version)
 (defn prn-emacs-version []
   (println (emacs-version)))
