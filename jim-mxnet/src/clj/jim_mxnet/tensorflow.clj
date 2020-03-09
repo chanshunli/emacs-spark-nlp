@@ -113,6 +113,10 @@
 
   )
 
+(comment
+  ;; 需要在emacs里面启动这个才能用emacs-version
+  ;; (jim-mxnet-httpd-start)
+  )
 (clomacs-defn emacs-version emacs-version)
 (defn prn-emacs-version []
   (println (emacs-version)))
