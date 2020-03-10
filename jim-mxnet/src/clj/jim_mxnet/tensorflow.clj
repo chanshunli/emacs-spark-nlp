@@ -57,7 +57,7 @@
 
 (defonce gensim-model
   (py/call-attr-kw  KeyedVectors "load_word2vec_format"
-    ["/Users/clojure/blockly.bin"] {:binary true}))
+    ["/Users/clojure/text8-vector.bin"] {:binary true}))
 
 (comment
   (word-similarity "canvas" "svg")
