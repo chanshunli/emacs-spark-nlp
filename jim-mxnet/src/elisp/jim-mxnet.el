@@ -54,6 +54,10 @@
                jim-mxnet.tensorflow/get-word-vector
                :lib-name "jim-mxnet")
 
+(clomacs-defun jim-mxnet-generate-project-txt8-files
+               jim-mxnet.tensorflow/generate-project-txt8-files
+               :lib-name "jim-mxnet")
+
 (comment
  (jim-mxnet-get-word-vector "python") ;=> 输出词向量,但是两个参数,就不知道怎么定义对接了
  (jim-mxnet-dot-word "apple" "steve") ;=> Not enough arguments for format string => 没有找到的单词才会爆的错误
