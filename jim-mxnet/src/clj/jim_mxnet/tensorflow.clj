@@ -126,4 +126,5 @@
                         (clojure.string/lower-case)
                         (re-seq #"\w+")
                         (clojure.string/join " "))]
-          (clojure.java.io/copy content out))))))
+          (clojure.java.io/copy content out))))
+    text8-file))

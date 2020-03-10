@@ -109,4 +109,23 @@
    "%s.text8"
    (nth 0 (reverse (split-string (get-git-root) "/")))))
 
+(defun word2vec-training ()
+  (let* ((text8-file (jim-mxnet-generate-project-txt8-files))
+         (bin-file-name (replace-regexp-in-string ".text8" ".bin" text8-file))
+         (cmd-list
+          (list  "/Users/clojure/CppPro/word2vec/bin/word2vec"
+                 "-train" text8-file
+                 "-output" bin-file-name
+                 "-cbow" "1" "-size" "200" "-window" "8" "-negative" "25" "-hs" "0" "-sample" "1e-4" "-threads" "20" "-binary" "1" "-iter" "15"))
+         (cmd-stri
+          (lambda (lis)
+            (s-join " " lis))))
+    (message "执行命令: %s" (funcall cmd-stri cmd-list))
+    (make-process
+     :name "training the word2vec file"
+     :command cmd-list
+     :sentinel (lambda (proc event)
+                 (message "finished training the word2vec file!"))
+     :buffer "*word2vec # training the word2vec file*")))
+
 (provide 'jim-mxnet)
