@@ -42,7 +42,8 @@
         markdown-mode
         prescient
         ivy-prescient
-        clomacs))
+        clomacs
+        s))
 
 (package-initialize)
 

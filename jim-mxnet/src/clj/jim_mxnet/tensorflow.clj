@@ -84,83 +84,20 @@
   [seq1 seq2]
   (py. gensim-model wmdistance  seq1 seq2))
 
+;; ---- 处理text8文件生成和词向量训练 -----
 (defn write-file
   [{:keys [file-name content]}]
   (with-open [out (clojure.java.io/output-stream file-name)]
     (clojure.java.io/copy content out)))
 
-(comment
-  ;; 只显示了core.clj文件
-  (shell/sh
-    "git" "grep" "--cached" "-Il" "\"\"")
-
-  ;; 只是显示了project.clj的root下面的所有文件
-  (shell/sh
-    "git" "ls-files")
-
-  (clomacs-defn get-vc-all-git-files get-vc-all-git-files)
-  (get-vc-all-git-files) ;; => ""
-
-  (clomacs-defn vc-text-file-name vc-text-file-name)
-  (vc-text-file-name) ;; => ""
-  ;; Wrong type argument: stringp, nil
-  ;;   in wrapped Clojure->Elisp function: jim_mxnet.tensorflow$vc_text_file_name@40c0a4f4
-  ;;   elisp: (vc-text-file-name)
-  ;; => ""
-
-  (clomacs-defn vc-root-dir vc-root-dir)
-  (vc-root-dir);;=> ""
-
-  )
-
-(comment
-  ;; 需要在emacs里面启动这个才能用emacs-version
-  ;; (jim-mxnet-httpd-start)
-
-  (clomacs-defn el-identity identity)
-  (el-identity 1)
-  ;; => "1"
-
-  (clomacs-defn emacs-major-version clomacs-get-emacs-major-version)
-  (emacs-major-version) ;;=> ""
-
-  ;; ----------
-  (clomacs-defn complete-auto-complete ejc-complete-auto-complete)
-  ;; 成功跳转,并且插入了aaaa
-  (complete-auto-complete "jim-mxnet.el" 1)
-
-  ;; --------- 也成功了...
-  (clomacs-defn complete-auto-complete-2 ejc-complete-auto-complete-2)
-  ;; 成功跳转,并且插入了22222
-  (complete-auto-complete-2 "jim-mxnet.el" 1)
-
-  (clomacs-eval "message" "\"111\"" true)
-  (clomacs-eval "message" "\"111\"" false)
-
-  (clomacs-eval "vc-root-dir" "()" false)
-
-  ;; (defun aaa (x) (+ x 100)) =>
-  (clomacs-eval "aaa" "(aaa 1)" false)
-  ;; => "101"
-
-  (clomacs-eval "aaax" "(aaa 1)" false) ;=> "101"
-
-  (clomacs-eval "aaaxdsa" "(format \"%s---\"(vc-root-dir))" true)
-;; => "nil---"
-  )
-
 (clomacs-defn emacs-version emacs-version)
 (defn prn-emacs-version []
   (println (emacs-version)))
 
-(clomacs-defn vc-root-dir vc-root-dir)
-(defn get-vc-root []
-  (vc-root-dir))
+(defn get-git-root []
+  (clomacs-eval "git-root" "(get-git-root)" false))
 
+;; ----- elisp的函数映射列表 start -----
 (clomacs-defn get-vc-all-git-files get-vc-all-git-files)
-(defn get-vc-git-files []
-  (get-vc-all-git-files))
-
 (clomacs-defn vc-text-file-name vc-text-file-name)
-(defn get-vc-tex-file-name []
-  (vc-text-file-name))
+;; ----- elisp的函数映射列表 end -----

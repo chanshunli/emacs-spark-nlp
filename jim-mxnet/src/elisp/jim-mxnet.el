@@ -74,10 +74,16 @@
 ;; 还有可以使用专家系统来推断 ，根据历史来学习
 ;; 讯飞的语音输入和打字输入的多模型迁移学习训练: 如何用产品本身的力量来生成标注数据,用迁移学习训练到你不具备的映射能力呢?
 
+(defun get-git-root ()
+  "vc-root-dir的替代者,可以在clojure里面调用成功"
+  (-> "git rev-parse --show-toplevel"
+      shell-command-to-string
+      s-trim))
+
 (defun run-in-vc-root (op-fn)
   "提供在vc-root环境下跑的环境"
   (let* ((old default-directory)
-         (-tmp  (setq default-directory (vc-root-dir))))
+         (-tmp  (setq default-directory (get-git-root))))
     (let*  ((res (funcall op-fn)))
       (progn
         (setq default-directory old)
@@ -85,6 +91,7 @@
 
 (comment
  (get-vc-all-git-files))
+
 (defun get-vc-all-git-files ()
   "可以输出git想要的非banery的文件列表"
   (run-in-vc-root
@@ -93,27 +100,9 @@
 
 (defun vc-text-file-name ()
   "word2vec训练需要的文本语料库,每个项目最多需要生成一个"
-  ;; (format "===%s" (vc-root-dir)) ;;=> clojure调用这行代码时, vc-root-dir返回为nil
+  ;; (format "===%s" (get-git-root)) ;;=> clojure调用这行代码时, get-git-root返回为nil
   (format
    "%s.text8"
-   (nth 1 (reverse (split-string (vc-root-dir) "/")))))
-
-(comment
- (append-to-file "xyz\n" nil "file.txt")
- )
-
-(cl-defun ejc-complete-auto-complete (buffer-name point)
-  ;; (switch-to-buffer buffer-name)
-  ;; (if (equal point (point))
-  ;;     (auto-complete))
-  ;; "aaaaa"
-  (format "===%s" (vc-root-dir))
-  )
-
-(defun ejc-complete-auto-complete-2 (buffer-name point)
-  (switch-to-buffer buffer-name)
-  ;; (if (equal point (point))
-  ;;     (auto-complete))
-  "22222")
+   (nth 0 (reverse (split-string (get-git-root) "/")))))
 
 (provide 'jim-mxnet)
