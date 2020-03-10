@@ -183,7 +183,7 @@
 ;; C-x C-v
 (global-set-key (kbd "C-c k") 'find-alternate-file) ;; C-x k 是kill-buffer
 
-(global-set-key (kbd "C-s") 'swiper)
+;; (global-set-key (kbd "C-s") 'swiper)
 
 
 ;; M-w w 复制一个单词 和表达式
