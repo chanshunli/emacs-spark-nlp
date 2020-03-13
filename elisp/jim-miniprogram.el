@@ -32,7 +32,7 @@
    (lambda (x)
      (progn
        (find-file miniprogram-file)
-       (with-current-buffer "foo.cljs"
+       (with-current-buffer "core.cljs"
          (push-it-real-good
           "M-x" "cider-jack-in-cljs"
           "<return>"))))))
