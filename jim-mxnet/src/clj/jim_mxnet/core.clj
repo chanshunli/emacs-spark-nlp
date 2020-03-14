@@ -3,7 +3,8 @@
    [libpython-clj.require :refer [require-python]]
    [libpython-clj.python :refer [py. py.. py.-] :as py]
    [tech.v2.datatype :as dtype]
-   [jim-mxnet.tensorflow])
+   [jim-mxnet.tensorflow]
+   [jim-mxnet.bert])
   (:use markdown.core
         clomacs))
 
