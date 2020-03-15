@@ -1,4 +1,4 @@
-(ns jim-mxnet.word2vec
+(ns postwalk-editer.word2vec
   "处理text8文件生成和词向量训练"
   (:require
    [clojure.java.shell :as shell]

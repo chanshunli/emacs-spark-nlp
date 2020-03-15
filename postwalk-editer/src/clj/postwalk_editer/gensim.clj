@@ -1,4 +1,4 @@
-(ns jim-mxnet.gensim
+(ns postwalk-editer.gensim
   (:require
    [clojure.java.shell :as shell]
    [libpython-clj.require :refer [require-python]]

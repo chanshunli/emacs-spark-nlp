@@ -21,6 +21,6 @@ elisp/jim-env.el
 .cpcache/
 .nrepl-port
 projectile.cache
-jim-mxnet/target
 .lein-repl-history
 *.text8
+postwalk-editer/target

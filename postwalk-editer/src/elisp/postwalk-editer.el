@@ -1,69 +1,69 @@
 (require 'clomacs)
 
-(clomacs-defun jim-mxnet-set-emacs-connection
+(clomacs-defun postwalk-editer-set-emacs-connection
                clomacs/set-emacs-connection
-               :lib-name "jim-mxnet")
-(clomacs-defun jim-mxnet-close-emacs-connection
+               :lib-name "postwalk-editer")
+(clomacs-defun postwalk-editer-close-emacs-connection
                clomacs/close-emacs-connection
-               :lib-name "jim-mxnet")
-(clomacs-defun jim-mxnet-require
+               :lib-name "postwalk-editer")
+(clomacs-defun postwalk-editer-require
                clojure.core/require
-               :lib-name "jim-mxnet")
+               :lib-name "postwalk-editer")
 
 (comment
- (jim-mxnet-httpd-start))
-(defun jim-mxnet-httpd-start ()
+ (postwalk-editer-httpd-start))
+(defun postwalk-editer-httpd-start ()
   "需要Clojure调用Emacs函数的时候,要先启动这个http服务"
   (interactive)
-  (cl-flet ((clomacs-set-emacs-connection 'jim-mxnet-set-emacs-connection)
-            (clomacs-require 'jim-mxnet-require))
+  (cl-flet ((clomacs-set-emacs-connection 'postwalk-editer-set-emacs-connection)
+            (clomacs-require 'postwalk-editer-require))
     (clomacs-httpd-start)))
 
-(defun jim-mxnet-httpd-stop ()
-  (cl-flet ((clomacs-close-emacs-connection 'jim-mxnet-close-emacs-connection)
-            (clomacs-require 'jim-mxnet-require))
+(defun postwalk-editer-httpd-stop ()
+  (cl-flet ((clomacs-close-emacs-connection 'postwalk-editer-close-emacs-connection)
+            (clomacs-require 'postwalk-editer-require))
     (clomacs-httpd-stop)))
 
-(clomacs-defun jim-mxnet-md-to-html-wrapper
+(clomacs-defun postwalk-editer-md-to-html-wrapper
                my-md-to-html-string
-               :namespace jim-mxnet.core
-               :lib-name "jim-mxnet"
+               :namespace postwalk-editer.core
+               :lib-name "postwalk-editer"
                :doc "Convert markdown to html via clojure lib.")
 
-(defun jim-mxnet-mdarkdown-to-html (beg end)
+(defun postwalk-editer-mdarkdown-to-html (beg end)
   "Add to the selected markdown text it's html representation."
   (interactive "r")
   (save-excursion
     (if (< (point) (mark))
         (exchange-point-and-mark))
     (insert
-     (concat "\n" (jim-mxnet-md-to-html-wrapper
+     (concat "\n" (postwalk-editer-md-to-html-wrapper
                    (buffer-substring beg end))))))
 
-(clomacs-defun jim-mxnet-strong-emacs-version
+(clomacs-defun postwalk-editer-strong-emacs-version
                strong-emacs-version
-               :namespace jim-mxnet.core
-               :lib-name "jim-mxnet"
+               :namespace postwalk-editer.core
+               :lib-name "postwalk-editer"
                :doc "Get Emacs version with markdown strong marks."
-               :httpd-starter 'jim-mxnet-httpd-start)
+               :httpd-starter 'postwalk-editer-httpd-start)
 
-(clomacs-defun jim-mxnet-dot-word
-               jim-mxnet.lmdb/dot-word
-               :lib-name "jim-mxnet")
+(clomacs-defun postwalk-editer-dot-word
+               postwalk-editer.lmdb/dot-word
+               :lib-name "postwalk-editer")
 
-(clomacs-defun jim-mxnet-get-word-vector
-               jim-mxnet.lmdb/get-word-vector
-               :lib-name "jim-mxnet")
+(clomacs-defun postwalk-editer-get-word-vector
+               postwalk-editer.lmdb/get-word-vector
+               :lib-name "postwalk-editer")
 
-(clomacs-defun jim-mxnet-generate-project-txt8-files
-               jim-mxnet.word2vec/generate-project-txt8-files
-               :lib-name "jim-mxnet")
+(clomacs-defun postwalk-editer-generate-project-txt8-files
+               postwalk-editer.word2vec/generate-project-txt8-files
+               :lib-name "postwalk-editer")
 
 (comment
- (jim-mxnet-get-word-vector "python") ;=> 输出词向量,但是两个参数,就不知道怎么定义对接了
- (jim-mxnet-dot-word "apple" "steve") ;=> Not enough arguments for format string => 没有找到的单词才会爆的错误
+ (postwalk-editer-get-word-vector "python") ;=> 输出词向量,但是两个参数,就不知道怎么定义对接了
+ (postwalk-editer-dot-word "apple" "steve") ;=> Not enough arguments for format string => 没有找到的单词才会爆的错误
 
- (jim-mxnet-dot-word "python" "tensorflow") ;;=> 429
+ (postwalk-editer-dot-word "python" "tensorflow") ;;=> 429
  ;; 因为看它的宏,就知道: defun ,el-func-name (&rest attributes) # 参数是不确定的
  )
 
@@ -110,7 +110,7 @@
    (nth 0 (reverse (split-string (get-git-root) "/")))))
 
 (defun word2vec-training ()
-  (let* ((text8-file (jim-mxnet-generate-project-txt8-files))
+  (let* ((text8-file (postwalk-editer-generate-project-txt8-files))
          (bin-file-name (replace-regexp-in-string ".text8" ".bin" text8-file))
          (cmd-list
           (list  "/Users/clojure/CppPro/word2vec/bin/word2vec"
@@ -128,4 +128,4 @@
                  (message "finished training the word2vec file!"))
      :buffer "*word2vec # training the word2vec file*")))
 
-(provide 'jim-mxnet)
+(provide 'postwalk-editer)

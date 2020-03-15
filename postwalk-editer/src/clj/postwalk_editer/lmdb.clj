@@ -1,4 +1,4 @@
-(ns jim-mxnet.lmdb
+(ns postwalk-editer.lmdb
   (:require
    [clojure.java.shell :as shell]
    [libpython-clj.require :refer [require-python]]

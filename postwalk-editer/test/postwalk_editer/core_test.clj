@@ -1,6 +1,6 @@
-(ns jim-mxnet.core-test
+(ns postwalk-editer.core-test
   (:require [clojure.test :refer :all]
-            [jim-mxnet.core :refer :all]))
+            [postwalk-editer.core :refer :all]))
 
 (deftest a-test
   (testing "FIXME, I fail."

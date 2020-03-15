@@ -1,4 +1,4 @@
-(ns jim-mxnet.mxnet
+(ns postwalk-editer.mxnet
   "专心于MXnet,而不是别人说用什么就用什么"
   (:require
    [clojure.java.shell :as shell]

@@ -1,4 +1,4 @@
-(ns jim-mxnet.libpython-init
+(ns postwalk-editer.libpython-init
   (:require
    [clojure.java.shell :as shell]
    [libpython-clj.require :refer [require-python]]

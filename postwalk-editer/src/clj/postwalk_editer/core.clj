@@ -1,14 +1,14 @@
-(ns jim-mxnet.core
+(ns postwalk-editer.core
   (:require
    [libpython-clj.require :refer [require-python]]
    [libpython-clj.python :refer [py. py.. py.-] :as py]
    [tech.v2.datatype :as dtype]
-   [jim-mxnet.libpython-init] ;; 在加载其他libpython函数之前加载好
-   [jim-mxnet.bert]
-   [jim-mxnet.lmdb]
-   [jim-mxnet.gensim]
-   [jim-mxnet.word2vec]
-   [jim-mxnet.mxnet])
+   [postwalk-editer.libpython-init] ;; 在加载其他libpython函数之前加载好
+   [postwalk-editer.bert]
+   [postwalk-editer.lmdb]
+   [postwalk-editer.gensim]
+   [postwalk-editer.word2vec]
+   [postwalk-editer.mxnet])
   (:use markdown.core
         clomacs))
 
