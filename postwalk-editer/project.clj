@@ -1,6 +1,6 @@
 (defproject postwalk-editer "0.2.0-SNAPSHOT"
   :description "Clomacs simple usage example."
-  :url "https://github.com/kostafey/postwalk-editer"
+  :url "https://github.com/chanshunli/emacs_spark_nlp/tree/master/postwalk-editer"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :source-paths ["src/clj"]
