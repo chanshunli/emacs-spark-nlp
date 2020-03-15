@@ -13,6 +13,7 @@
 (comment
  (jim-mxnet-httpd-start))
 (defun jim-mxnet-httpd-start ()
+  "需要Clojure调用Emacs函数的时候,要先启动这个http服务"
   (interactive)
   (cl-flet ((clomacs-set-emacs-connection 'jim-mxnet-set-emacs-connection)
             (clomacs-require 'jim-mxnet-require))
@@ -47,15 +48,15 @@
                :httpd-starter 'jim-mxnet-httpd-start)
 
 (clomacs-defun jim-mxnet-dot-word
-               jim-mxnet.tensorflow/dot-word
+               jim-mxnet.lmdb/dot-word
                :lib-name "jim-mxnet")
 
 (clomacs-defun jim-mxnet-get-word-vector
-               jim-mxnet.tensorflow/get-word-vector
+               jim-mxnet.lmdb/get-word-vector
                :lib-name "jim-mxnet")
 
 (clomacs-defun jim-mxnet-generate-project-txt8-files
-               jim-mxnet.tensorflow/generate-project-txt8-files
+               jim-mxnet.word2vec/generate-project-txt8-files
                :lib-name "jim-mxnet")
 
 (comment
@@ -104,7 +105,6 @@
 
 (defun vc-text-file-name ()
   "word2vec训练需要的文本语料库,每个项目最多需要生成一个"
-  ;; (format "===%s" (get-git-root)) ;;=> clojure调用这行代码时, get-git-root返回为nil
   (format
    "%s.text8"
    (nth 0 (reverse (split-string (get-git-root) "/")))))

@@ -15,27 +15,26 @@
    :sentinel `(lambda (proc event)
                 (progn
                   (message "finished open cli ws!")
-
-                  (funcall ,success-fn "ok")
-                  ;; (sit-for 10) ;; 线程不阻塞的
-                  ;; (message "===PORT==%s" ,(show-cli-status))
-                  ))
+                  (funcall ,success-fn "ok")))
    :buffer "*mini-program-cljs # open cli ws*"))
 
 (comment
- (open-cli-ws (lambda (x) (message x))))
+ (open-cli-ws (lambda (x) (message x)))
+
+ ;; 默认选择shadow-cljs构建,都无效的设置变量尝试
+ (setq cider-default-repl-command 'shadow)
+ (setq cider-default-cljs-repl 'shadow)
+ (setq cider-jack-in-default 'shadow-cljs))
 
 (defun miniprogram-jack ()
   (interactive)
-  "TODO: 需要自己选node-repl"
+  "需要自己选 shadow-cljs & node-repl"
   (open-cli-ws
    (lambda (x)
      (progn
        (find-file miniprogram-file)
-       (with-current-buffer "foo.cljs"
-         (push-it-real-good
-          "M-x" "cider-jack-in-cljs"
-          ;; "shadow-cljs" ;; 无效
-          "<return>"))))))
+       (with-current-buffer "core.cljs"
+         (progn
+           (call-interactively #'cider-jack-in-cljs)))))))
 
 (provide 'jim-miniprogram)
