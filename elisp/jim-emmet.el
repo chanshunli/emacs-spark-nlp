@@ -147,4 +147,20 @@
 ;; 2. input => <input />
 ;; 3. 两个style自动合并的问题
 
+;; --------------- mini-program-cljs 和 Emacs的结合的函数 -------
+;; 1. 需要先确保eval了mini-program-cljs.core(C-x C-e)
+(defun mpcljs-eval-code (code)
+  (with-current-buffer (get-cljs-cider-buffer)
+    (eval-clj-code code)))
+
+(defun mpc/alert (var)
+  (mpcljs-eval-code
+   (format ;; 不能返回函数或者promise不然就emacs会报错
+    "(do (mini-program-cljs.js-wx/log %s) true)" var)))
+
+(defun mpc/g-data ()
+  (interactive)
+  (mpcljs-eval-code
+   "(do (evaluate (fn [] (-> (js/getApp) .-globalData))) true)"))
+
 (provide 'jim-emmet)
