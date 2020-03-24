@@ -163,6 +163,25 @@
   (mpcljs-eval-code
    "(do (evaluate (fn [] (-> (js/getApp) .-globalData))) true)"))
 
+(defun remove-flex ()
+  (interactive)
+  (let* ((bein-p
+          (region-beginning))
+         (end-p
+          (region-end))
+         (regexps
+          (s-join "\\|"
+                  (list "flex-direction: column;"
+                        "flex-direction: row;"
+                        "flex: 1 1 auto;"
+                        "display: flex;")))
+         (new-stri (->>
+                    (get-mark-content (current-buffer))
+                    (replace-regexp-in-string regexps ""))))
+    (progn
+      (kill-region bein-p end-p)
+      (insert new-stri))))
+
 ;; https://juejin.im/post/5c0b6869f265da61137f1725
 (defun flex->old ()
   "TODO: flex 布局 转为 普通布局, 时时刻刻想着复用^2=>复利")
