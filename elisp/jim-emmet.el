@@ -163,4 +163,10 @@
   (mpcljs-eval-code
    "(do (evaluate (fn [] (-> (js/getApp) .-globalData))) true)"))
 
+;; https://juejin.im/post/5c0b6869f265da61137f1725
+(defun flex->old ()
+  "TODO: flex 布局 转为 普通布局, 时时刻刻想着复用^2=>复利")
+
+(defun old->flex ())
+
 (provide 'jim-emmet)
