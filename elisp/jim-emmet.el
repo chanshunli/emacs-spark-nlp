@@ -4,8 +4,10 @@
 
 ;; 输入view.abc => M-RET => ` <view class="abc"></view> `
 
+
+
 (use-package emmet-mode
-  :hook (mhtml-mode nxml-mode css-mode)
+  :hook (mhtml-mode nxml-mode css-mode web-mode)
   :bind
   (:map emmet-mode-keymap
         ("M-RET" . 'emmet-expand-line)
@@ -15,10 +17,14 @@
   (add-hook 'mhtml-mode-hook 'smartparens-mode))
 
 (use-package xml
-  :mode ("\\.wxml\\'" . mhtml-mode))
+  :mode ("\\.wxml\\'" . web-mode))
 
 (use-package css-mode
   :mode ("\\.wxss\\'" . css-mode))
+
+;; web-mode: `C-c C-f`展开和收缩html
+;; mhtml-mode: `C-c C-f` 向前一个html表达式, `C-c C-b`是向后一个html表达式
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
 (defun get-mark-content (buffername)
   (with-current-buffer
@@ -163,24 +169,29 @@
   (mpcljs-eval-code
    "(do (evaluate (fn [] (-> (js/getApp) .-globalData))) true)"))
 
-(defun remove-flex ()
-  (interactive)
+(defun mark-replace (regexps targets)
   (let* ((bein-p
           (region-beginning))
          (end-p
           (region-end))
-         (regexps
+         (new-stri (->>
+                    (current-buffer)
+                    (get-mark-content)
+                    (replace-regexp-in-string regexps targets))))
+    (progn
+      (kill-region bein-p end-p)
+      (insert new-stri))))
+
+(defun remove-flex ()
+  (interactive)
+  (let* ((regexps
           (s-join "\\|"
                   (list "flex-direction: column;"
                         "flex-direction: row;"
                         "flex: 1 1 auto;"
-                        "display: flex;")))
-         (new-stri (->>
-                    (get-mark-content (current-buffer))
-                    (replace-regexp-in-string regexps ""))))
-    (progn
-      (kill-region bein-p end-p)
-      (insert new-stri))))
+                        "display: flex;"))))
+    (mark-replace regexps "")))
+
 
 ;; https://juejin.im/post/5c0b6869f265da61137f1725
 (defun flex->old ()

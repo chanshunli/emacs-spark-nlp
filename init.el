@@ -43,7 +43,8 @@
         prescient
         ivy-prescient
         clomacs
-        s))
+        s
+        web-mode))
 
 (package-initialize)
 
