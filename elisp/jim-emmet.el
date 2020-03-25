@@ -1,4 +1,5 @@
 (require 'emmet-mode)
+(require 'css-color-list)
 
 ;; https://github.com/smihica/emmet-mode
 
@@ -24,6 +25,7 @@
 
 ;; web-mode: `C-c C-f`展开和收缩html
 ;; mhtml-mode: `C-c C-f` 向前一个html表达式, `C-c C-b`是向后一个html表达式
+;; web-mode-comment-or-uncomment 是注释html
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
 (defun get-mark-content (buffername)
@@ -198,5 +200,17 @@
   "TODO: flex 布局 转为 普通布局, 时时刻刻想着复用^2=>复利")
 
 (defun old->flex ())
+
+(defun get-rand-color ()
+  (nth
+   (random (length css-color-list))
+   css-color-list))
+
+;; Good Tips: 调试CSS是否错误 , 或者用drag this debug.css
+(defun debug-css ()
+  (interactive)
+  (insert (format "background-color: %s;" (get-rand-color))))
+
+(defun undebug-css ())
 
 (provide 'jim-emmet)
