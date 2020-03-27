@@ -150,6 +150,20 @@
       (kill-region bein-p end-p)
       (insert new-stri))))
 
+(comment
+ (run-in-s-exp
+  (lambda (start end content)
+    (format "%d===%d---%s" start end content))))
+(defun run-in-s-exp (op-fn)
+  (save-excursion
+    (backward-sexp)
+    (let ((end (point)))
+      (forward-sexp)
+      (message "Run in s exp, start: %d, end: %d"  end (point))
+      (funcall op-fn
+               end (point)
+               (buffer-substring-no-properties end (point))))))
+
 (defun isearch-line-forward (&optional regexp-p)
   "行内搜索某个关键字"
   (interactive "P")
