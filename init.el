@@ -349,7 +349,7 @@
 (require 'jim-clj-alias)
 (require 'jim-r-lisp)
 (require 'jim-scaffold)
-(require 'jim-tabnine)
+;; (require 'jim-tabnine)
 (require 'jim-yasnipet)
 (require 'jim-emmet)
 (require 'jim-ivy)
@@ -358,6 +358,9 @@
 (require 'jim-postwalk-editer)
 (require 'jim-miniprogram)
 
+(defun tabnine-require ()
+  (interactive)
+  (require 'jim-tabnine))
 ;;------ 连接clojure和elisp的clomacs(包装了cider)
 (add-to-list 'load-path "~/.emacs.d/postwalk-editer/src/elisp/")
 (require 'postwalk-editer)
