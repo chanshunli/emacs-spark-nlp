@@ -134,21 +134,23 @@
 
 (defun join-two-styles ()
   (interactive)
-  (let* ((bein-p
-          (region-beginning))
-         (end-p
-          (region-end))
-         (splits (split-string
-                  (get-mark-content (current-buffer))
-                  "\""))
-         (new-stri (concat
-                    "style=\""
-                    (nth 1 splits)
-                    (nth 3 splits)
-                    "\"")))
-    (progn
-      (kill-region bein-p end-p)
-      (insert new-stri))))
+  (progn
+    (call-interactively #'style-gotochar-to-end)
+    (let* ((bein-p
+            (region-beginning))
+           (end-p
+            (region-end))
+           (splits (split-string
+                    (get-mark-content (current-buffer))
+                    "\""))
+           (new-stri (concat
+                      "style=\""
+                      (nth 1 splits)
+                      (nth 3 splits)
+                      "\"")))
+      (progn
+        (kill-region bein-p end-p)
+        (insert new-stri)))))
 
 (comment
  (run-in-s-exp
@@ -200,6 +202,8 @@
 (defun style-gotochar-to-end ()
   (interactive)
   (while (search-forward "style=" (line-end-position) t)
+    (search-backward "style=" (line-beginning-position) t)
+    (call-interactively #'set-mark-command)
     (while (search-forward "\"" (line-end-position) t)
       (message "style到头了"))))
 
