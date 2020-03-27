@@ -179,6 +179,21 @@
                           string bound noerror))))))
     (isearch-forward regexp-p)))
 
+(defun isearch-s-exp-forward (&optional regexp-p)
+  "S表达式内搜索某个关键字,需要在S表达式的末尾进行执行该命令才行"
+  (interactive "P")
+  (run-in-s-exp
+   (lambda (beg end content)
+     (let* ((isearch-message-prefix-add "[Line]")
+            (isearch-search-fun-function
+             `(lambda ()
+                (lambda (string &optional bound noerror)
+                  (save-restriction
+                    (narrow-to-region ,beg ,end)
+                    (funcall (isearch-search-fun-default)
+                             string bound noerror))))))
+       (isearch-forward regexp-p)))))
+
 ;; 小程序和html的语法兼容表
 ;; 1. img => <image> </image>
 ;; 2. input => <input />
