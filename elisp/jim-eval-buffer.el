@@ -60,4 +60,33 @@
   (cond ((null n) (jw-eval-buffer))
         (t (jw-clear-eval-buffer)))  )
 
+;; 2016对朗说: 非Lisp语言只能依赖于Emacs Lisp机器来完成宏的编辑了, 我们若不能在工作中写Lisp语言的话 => drb + eval-buffer 不要在项目里面编程, 而是给定一个环境(drb)去写兴趣库
+(defun jw-eval-js ()
+  (interactive)
+  (insert "
+var _ = require('underscore');
+console.log(
+    (function () {
+        return 111;
+    })()
+)
+"))
+
+(defun jw-eval-rb ()
+  (interactive)
+  "
+puts -> {
+  123
+}[]
+")
+
+(defun jw-eval-cpp ()
+  (interactive))
+
+(defun jw-eval-java ()
+  (interactive))
+
+(defun jw-eval-py ()
+  (interactive))
+
 (provide 'jim-eval-buffer)
