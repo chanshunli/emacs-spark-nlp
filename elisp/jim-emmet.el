@@ -194,6 +194,15 @@
                              string bound noerror))))))
        (isearch-forward regexp-p)))))
 
+(comment
+ (search-forward "style=" nil t)        ;;nil代表整个文件搜索完, t代表搜索有结果就继续往前
+ )
+(defun style-gotochar-to-end ()
+  (interactive)
+  (while (search-forward "style=" (line-end-position) t)
+    (while (search-forward "\"" (line-end-position) t)
+      (message "style到头了"))))
+
 ;; 小程序和html的语法兼容表
 ;; 1. img => <image> </image>
 ;; 2. input => <input />
