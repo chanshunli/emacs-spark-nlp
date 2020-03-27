@@ -135,6 +135,7 @@
 (defun join-two-styles ()
   (interactive)
   (progn
+    (goto-char (line-beginning-position))
     (call-interactively #'style-gotochar-to-end)
     (let* ((bein-p
             (region-beginning))
@@ -196,9 +197,14 @@
                              string bound noerror))))))
        (isearch-forward regexp-p)))))
 
+(defun get-current-line-number ()
+  (string-to-number (format-mode-line "%l")))
+
 (comment
- (search-forward "style=" nil t)        ;;nil代表整个文件搜索完, t代表搜索有结果就继续往前
- )
+ (search-forward "style=" nil t) ;;nil代表整个文件搜索完, t代表搜索有结果就继续往前
+
+ (while (search-forward "style=" nil t)
+   (message "===%d" (get-current-line-number))))
 (defun style-gotochar-to-end ()
   (interactive)
   (while (search-forward "style=" (line-end-position) t)
@@ -206,6 +212,14 @@
     (call-interactively #'set-mark-command)
     (while (search-forward "\"" (line-end-position) t)
       (message "style到头了"))))
+
+(defun join-all-two-styles ()
+  (interactive)
+  (goto-char (point-min))
+  (while (search-forward "style=" nil t)
+    (progn
+      (message "执行join style: %d" (get-current-line-number))
+      (call-interactively #'join-two-styles))))
 
 ;; 小程序和html的语法兼容表
 ;; 1. img => <image> </image>
