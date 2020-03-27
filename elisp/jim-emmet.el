@@ -150,6 +150,21 @@
       (kill-region bein-p end-p)
       (insert new-stri))))
 
+(defun isearch-line-forward (&optional regexp-p)
+  "行内搜索某个关键字"
+  (interactive "P")
+  (let* ((beg (line-beginning-position))
+         (end (line-end-position))
+         (isearch-message-prefix-add "[Line]")
+         (isearch-search-fun-function
+          `(lambda ()
+             (lambda (string &optional bound noerror)
+               (save-restriction
+                 (narrow-to-region ,beg ,end)
+                 (funcall (isearch-search-fun-default)
+                          string bound noerror))))))
+    (isearch-forward regexp-p)))
+
 ;; 小程序和html的语法兼容表
 ;; 1. img => <image> </image>
 ;; 2. input => <input />
