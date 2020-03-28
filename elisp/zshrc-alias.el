@@ -75,6 +75,11 @@
   (interactive)
   (cider-connect-sibling-clj nil))
 
+;; 同时修改多个文件的目录:
+;; 1. M-x find-name-dired => 输入目录 => 输入*abc*表达式
+;; 2. C-x C-q => 修改文件和文件夹的名字
+;; 3. C-x C-s
+
 ;; 同时修改多个文件的某个关键词
 ;;### 1. projectile-grep搜索关键词
 ;;### 2. wgrep-change-to-wgrep-mode
