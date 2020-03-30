@@ -375,3 +375,6 @@
 ;; TODO: 写很多Clojure的宏出来,写Elisp就像写clojure一样
 ;; https://github.com/plexus/a.el ;;
 ;; (a-get (a-list :foo 5 :bar 6) :foo) ;;=> 5
+
+;; 如果只是在M-x里面打开这个tabnine-require,就会导致cider-error莫名其妙的错误
+(tabnine-require)
