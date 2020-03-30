@@ -89,6 +89,23 @@
       "(wechat-clj.util/get-class-names-styles \"%s\")"
       class-name))))
 
+(defun mark-replace (mark-op-fn)
+  (let* ((bein-p
+          (region-beginning))
+         (end-p
+          (region-end))
+         (new-stri (funcall mark-op-fn (get-mark-content (current-buffer)))))
+    (progn
+      (kill-region bein-p end-p)
+      (insert new-stri))))
+
+(defun class->styles ()
+  "对应整体转class失败的情况,用手工来转: herb会导致一些出错的class,尤其是含有伪元素"
+  (interactive)
+  (mark-replace
+   (lambda (marked-stri)
+     (call-clj-get-class-names-styles marked-stri))))
+
 ;; M-x replace-regexp Replace regexp (default \(.*\) → \,(call-clj-get-class-names-styles \1)):
 
 (defun match-underscore ()
@@ -222,9 +239,17 @@
       (call-interactively #'join-two-styles))))
 
 ;; 小程序和html的语法兼容表
-;; 1. img => <image> </image>
-;; 2. input => <input />
-;; 3. 两个style自动合并的问题
+;; 1. img => <image> </> TODO
+;; 2. input => <input /> TODO
+;; 3. 两个style自动合并的问题 => 已完成
+;; 4. hr => view标签表示 TODO
+
+;; 流程:
+;; 1. hiccup生成的页面复制过来
+;; 2. replace div view
+;; 3. replace em 为 rpx
+;; 4. joiin all two styles
+;; 注意: 样式差不多了,image必须定义高度和宽度才行,不能只定义宽度 ，然后item也必须给高度
 
 ;; --------------- mini-program-cljs 和 Emacs的结合的函数 -------
 ;; 1. 需要先确保eval了mini-program-cljs.core(C-x C-e)
