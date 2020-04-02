@@ -23,6 +23,8 @@
 (use-package css-mode
   :mode ("\\.wxss\\'" . css-mode))
 
+(setq web-mode-code-indent-offset 2)
+
 ;; web-mode: `C-c C-f`展开和收缩html
 ;; mhtml-mode: `C-c C-f` 向前一个html表达式, `C-c C-b`是向后一个html表达式
 ;; web-mode-comment-or-uncomment 是注释html

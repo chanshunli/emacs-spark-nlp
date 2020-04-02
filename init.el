@@ -163,7 +163,7 @@
 ;; 需要在*scratch*的buffer下才能执行成功 # 搜索中文需要加一个空格在中文词后面
 ;; (define-key global-map (kbd "C-x C-a") 'counsel-projectile-ag)
 (global-set-key
- (kbd "C-x C-a") ;; 这个键在elisp下面没有用,被覆盖了
+ (kbd "C-c C-a")
  (lambda ()
    (interactive)
    (call-interactively #'counsel-projectile-ag)))
