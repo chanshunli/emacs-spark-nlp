@@ -101,6 +101,9 @@
   (interactive)
   (call-interactively #'save-some-buffers))
 
+(defun gsub-file ()
+  (interactive)
+  (call-interactively #'find-name-dired))
 ;; M-x magit-status => #  按下修改的文件就会打印出来
 ;; ## git add # s
 ;; ### commmit # cc

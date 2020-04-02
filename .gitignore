@@ -24,3 +24,4 @@ projectile.cache
 .lein-repl-history
 *.text8
 postwalk-editer/target
+semanticdb/
