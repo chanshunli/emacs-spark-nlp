@@ -36,4 +36,13 @@
 ;; nil t "fo")
 ;;;; (ido-completing-read "test: " '("a" "b" "c"))
 
+;; 终于解决了ivy列表的颜色主题选中看不清的问题: https://github.com/hlissner/emacs-doom-themes/blob/master/themes/doom-molokai-theme.el#L152
+(custom-set-faces
+ '(ivy-current-match
+   ((((class color) (background light))
+     :background "red" :foreground "white")
+    (((class color) (background dark))
+     :background "blue" :foreground "green"))
+   (ivy-minibuffer-match-face-1 :background "red" :foreground "yellow")))
+
 (provide 'jim-ivy)
