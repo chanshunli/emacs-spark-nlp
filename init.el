@@ -168,6 +168,13 @@
    (interactive)
    (call-interactively #'counsel-projectile-ag)))
 
+;; C-c C-a 在java模式下面会被覆盖掉, C-x C-a在Elisp模式下会被覆盖掉
+(global-set-key
+ (kbd "C-x C-a")
+ (lambda ()
+   (interactive)
+   (call-interactively #'counsel-projectile-ag)))
+
 (define-key global-map (kbd "C-p") 'counsel-projectile-find-file)
 ;; 关闭所有buffer: 针对project来的 # 需要在vterm的buffer下面执行才有效=>会问你要不要关掉repl,你选择no,其他文件都会被关掉,关于这个项目的
 (define-key global-map (kbd "C-c C-q") 'projectile-kill-buffers)
