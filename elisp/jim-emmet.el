@@ -5,8 +5,6 @@
 
 ;; 输入view.abc => M-RET => ` <view class="abc"></view> `
 
-
-
 (use-package emmet-mode
   :hook (mhtml-mode nxml-mode css-mode web-mode)
   :bind
@@ -23,7 +21,22 @@
 (use-package css-mode
   :mode ("\\.wxss\\'" . css-mode))
 
-(setq web-mode-code-indent-offset 2)
+(setq-default indent-tabs-mode nil)
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 4)
+  (setq web-mode-enable-auto-pairing t)
+  (setq web-mode-enable-auto-closing t)
+  (setq web-mode-enable-current-element-highlight t)
+  (setq web-mode-enable-current-column-highlight t)
+  (setq web-mode-script-padding 2))
+
+(with-eval-after-load 'web-mode
+  (my-web-mode-hook))
 
 ;; web-mode: `C-c C-f`展开和收缩html
 ;; mhtml-mode: `C-c C-f` 向前一个html表达式, `C-c C-b`是向后一个html表达式
