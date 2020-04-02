@@ -32,12 +32,17 @@
 ;; 在Emacs启动的mutil-term是zsh # 在外面终端启动的是closh
 (defun zsh ()
   (interactive)
-  (if (y-or-n-p "在当前打开目录?")
-      (vterm)
-    (switch-to-git-projects
-     (lambda (project)
-       (setq default-directory project)
-       (vterm)))))
+  (let* ((buffer-name
+          (format "%s"
+                  (read-string
+                   (format "zsh name %d:"
+                           (random 10))))))
+    (if (y-or-n-p "在当前打开目录?")
+        (vterm (format "zsh-%s" buffer-name))
+      (switch-to-git-projects
+       (lambda (project)
+         (setq default-directory project)
+         (vterm (format "zsh-%s" buffer-name)))))))
 
 ;; 定时做减法是整理的艺术
 (defun vv ()
