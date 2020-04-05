@@ -31,6 +31,7 @@
 
 ;; 在Emacs启动的mutil-term是zsh # 在外面终端启动的是closh
 (defun zsh ()
+  "TODO: 直接输入命令作为zsh tab名字,否则就输入ls"
   (interactive)
   (let* ((buffer-name
           (format "%s"

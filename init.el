@@ -342,9 +342,11 @@
 
 ;; === 分出去文件的配置: 不同的文件放不同的功能,整理好,为道益损 ===
 (add-to-list 'load-path
-             (if (null (getenv "PWD"))
-                 "~/.emacs.d/elisp/" ;; in Mac Emacs UI
-               "~/emacs_spark/elisp/"))
+             "~/.emacs.d/elisp/"
+             ;; (if (null (getenv "PWD"))
+             ;;     "~/.emacs.d/elisp/" ;; in Mac Emacs UI
+             ;;   "~/emacs_spark/elisp/")
+             )
 (require 'zshrc-alias)  ;; zshrc alias的思想
 (require 'kungfu)
 (require 'code-search)
