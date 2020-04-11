@@ -366,6 +366,7 @@
 (require 'jim-markdown)
 (require 'jim-postwalk-editer)
 (require 'jim-miniprogram)
+(require 'jim-scheme)
 
 (defun tabnine-require ()
   (interactive)
