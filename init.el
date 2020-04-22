@@ -44,7 +44,9 @@
         ivy-prescient
         clomacs
         s
-        web-mode))
+        web-mode
+        intero
+        haskell-mode))
 
 (package-initialize)
 
@@ -367,6 +369,7 @@
 (require 'jim-postwalk-editer)
 (require 'jim-miniprogram)
 (require 'jim-scheme)
+(require 'jim-haskell)
 
 (defun tabnine-require ()
   (interactive)
