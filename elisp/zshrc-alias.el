@@ -154,6 +154,10 @@
   (interactive)
   (shell-command-to-string "git grep --cached -Il ''"))
 
+(defun dblue ()
+  (interactive)
+  (insert "\"#5c6b74\""))
+
 ;; C-M-b #
 
 (provide 'zshrc-alias)

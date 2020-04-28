@@ -164,6 +164,34 @@
       (kill-region bein-p end-p)
       (insert new-stri))))
 
+(defun replace-image ()
+  "TODO: 先<img替换为<image,需要<image结尾加个/>, 然后style需要长和宽都要设置,不然小程序会不认高度,导致页面很长"
+  (interactive)
+  (let* ((bein-p
+          (region-beginning))
+         (end-p
+          (region-end))
+         (new-stri
+          "" ;; TODO
+          ))
+    (progn
+      (kill-region bein-p end-p)
+      (insert new-stri))))
+
+(defun replace-input ()
+  "需要<input结尾加个/>"
+  (interactive)
+  (let* ((bein-p
+          (region-beginning))
+         (end-p
+          (region-end))
+         (new-stri
+          "" ;; TODO
+          ))
+    (progn
+      (kill-region bein-p end-p)
+      (insert new-stri))))
+
 (defun join-two-styles ()
   (interactive)
   (progn
