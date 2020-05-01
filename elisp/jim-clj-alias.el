@@ -20,6 +20,11 @@
   (interactive)
   (eval-clj-code "(.clear js/localStorage)"))
 
+(defun interpreter-list ()
+  "用万能的list树和Postwalk解释器算法来写算法"
+  (interactive)
+  (insert "(clojure.walk/postwalk-demo [[1 2] [3 4 [5 6]] [7 8]])"))
+
 (defun is-comp? ()
   "判断一个React组件引用是否正确: util模式 => 元解释器模式开发"
   (interactive)
