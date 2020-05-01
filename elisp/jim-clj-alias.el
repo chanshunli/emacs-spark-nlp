@@ -25,6 +25,19 @@
   (interactive)
   (insert "(clojure.walk/postwalk-demo [[1 2] [3 4 [5 6]] [7 8]])"))
 
+(defun postwalk-any ()
+  "通过类型特征工程来cond递归解释 => 深度学习自动化特征工程"
+  (interactive)
+  (insert  "
+  (clojure.walk/postwalk
+   (fn [x]
+       (cond
+        (vector? x) (prn (str \"Walked: \" x))
+        :else x))
+   [[1 2] [3 4 [5 6]] [7 8]])
+")
+  )
+
 (defun is-comp? ()
   "判断一个React组件引用是否正确: util模式 => 元解释器模式开发"
   (interactive)
