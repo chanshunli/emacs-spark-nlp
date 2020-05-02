@@ -12,6 +12,10 @@
   (interactive)
   (eval-clj-code "(cljs.pprint/pprint @re-frame.db/app-db)"))
 
+(defun insert-appdb ()
+  (interactive)
+  (insert "(cljs.pprint/pprint @re-frame.db/app-db)"))
+
 (defun page-reload ()
   (interactive)
   (eval-clj-code "(.reload js/location)"))
@@ -37,6 +41,14 @@
    [[1 2] [3 4 [5 6]] [7 8]])
 ")
   )
+
+(defun for-key ()
+  (interactive)
+  (insert "^{:key item}"))
+
+(defun input-default ()
+  (interactive)
+  (insert "placeholder"))
 
 (defun is-comp? ()
   "判断一个React组件引用是否正确: util模式 => 元解释器模式开发"
