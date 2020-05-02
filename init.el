@@ -370,6 +370,7 @@
 (require 'jim-miniprogram)
 (require 'jim-scheme)
 (require 'jim-haskell)
+(require 'jim-dired)
 
 (defun tabnine-require ()
   (interactive)
