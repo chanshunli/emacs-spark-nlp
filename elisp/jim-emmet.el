@@ -352,4 +352,11 @@
 
 (defun undebug-css ())
 
+;; getComputedStyle方法获取的是最终应用在元素上的所有CSS属性对象（即使没有CSS代码，也会把默认的祖宗八代都显示出来）
+;; window.getComputedStyle($0).getPropertyValue('height')
+;; (defn get-div-prop [div prop]
+;;   (-> js/window
+;;     (.getComputedStyle div  )
+;;     (.getPropertyValue prop )))
+
 (provide 'jim-emmet)
