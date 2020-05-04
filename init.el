@@ -390,4 +390,5 @@
 ;; https://github.com/plexus/a.el ;;
 ;; (a-get (a-list :foo 5 :bar 6) :foo) ;;=> 5
 
- ;; C-c SPC ## mvn的对齐
+;; C-c SPC ## mvn的对齐
+;; M-x toggle-debug-on-error # 出现错误就会捕捉到*Backtrace*里面
