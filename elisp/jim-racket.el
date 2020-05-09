@@ -1,4 +1,6 @@
 
+(add-hook 'racket-mode-hook 'lispy-mode)
+
 
 (defun rkt-datalog-head ()
   "一个问题在某个领域很难,但是跳出这个领域,变成另外一个领域很简单的问题:https://docs.racket-lang.org/datalog/"
