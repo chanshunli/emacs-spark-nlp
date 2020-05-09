@@ -50,6 +50,11 @@
   (interactive)
   (insert "placeholder"))
 
+(defun clojure-uniq ()
+  "老是会忘记的名称: alias别名一下自己的理解的,能记住的名字"
+  (interactive)
+  (insert "(distinct)"))
+
 (defun is-comp? ()
   "判断一个React组件引用是否正确: util模式 => 元解释器模式开发"
   (interactive)

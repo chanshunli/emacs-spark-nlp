@@ -46,7 +46,8 @@
         s
         web-mode
         intero
-        haskell-mode))
+        haskell-mode
+        racket-mode))
 
 (package-initialize)
 
@@ -369,6 +370,7 @@
 (require 'jim-postwalk-editer)
 (require 'jim-miniprogram)
 (require 'jim-scheme)
+(require 'jim-racket)
 (require 'jim-haskell)
 (require 'jim-dired)
 
@@ -392,3 +394,5 @@
 
 ;; C-c SPC ## mvn的对齐
 ;; M-x toggle-debug-on-error # 出现错误就会捕捉到*Backtrace*里面
+
+;; muti cursor来头部选一列,然后删除: 就能代替replace-string 替换掉空行问题
