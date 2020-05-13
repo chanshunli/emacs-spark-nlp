@@ -55,6 +55,10 @@
   (interactive)
   (insert "(distinct)"))
 
+(defun on-change-event ()
+  (interactive)
+  (insert "(.. e -target -value)"))
+
 (defun is-comp? ()
   "判断一个React组件引用是否正确: util模式 => 元解释器模式开发"
   (interactive)
