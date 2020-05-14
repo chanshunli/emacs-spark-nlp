@@ -124,5 +124,74 @@ Page({
   (insert "import { MiniCljs } from 'mini-program-cljs';
 const util = require('../../utils/util.js');"))
 
+;;--------------- 小程序的组件生成 ----- 复用组件
+(defun mini-comps-js ()
+  "
+Component({
+  /**
+   * 组件的属性列表
+   */
+  properties: {
+    tips: {
+      type: String,
+      value: '组件X',
+    },
+  },
+
+  /**
+   * 组件的初始数据
+   */
+  data: {
+
+  },
+
+  /**
+   * 组件的方法列表
+   */
+  methods: {
+
+  },
+});
+")
+
+(defun mini-comps-json ()
+  "
+{
+  \"component\": true,
+  \"usingComponents\": {}
+}
+")
+
+(defun mini-comps-wxss ()
+  "
+.container-update {
+    padding: 100rpx 0;
+}
+")
+
+(defun mini-comps-wxml ()
+  "
+<view class=\"container container-update\">
+  {{tips}}
+</view>
+")
+
+(defun generate-miniprogram-comps (name)
+  (interactive "sName")
+  (let* (;; (name "dot-nav")
+         (js (mini-comps-js))
+         (json (mini-comps-json))
+         (wxml (mini-comps-wxml))
+         (wxss (mini-comps-wxss))
+         (path (concat (vc-root-dir) "components/" name "/")))
+    (progn
+      (make-directory path)
+      (write-region js nil (concat path "index" ".js"))
+      (write-region json nil (concat path "index" ".json"))
+      (write-region wxml nil (concat path "index" ".wxml"))
+      (write-region wxss nil (concat path "index" ".wxss"))
+      (insert (format
+               "\"%s\": \"/components/%s/index\","
+               name name)))))
 
 (provide 'jim-scaffold)
