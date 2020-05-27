@@ -1,5 +1,10 @@
 (require 'package)
 
+;; 当项目没有解决思路的时候可以做的三件事情:
+;; 1. 做容易的先,高阶化描述简单过程: 像兰切一样快速吃饱自己,而不是过早的完美主义卡死大脑流
+;; 2. 抽象出来可以复用的库: 复用^2 = 复利
+;; 3. Emacs配置,自我设计工具: 磨刀不误砍柴工
+
 (setq package-archives
       '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
         ("melpa" . "http://elpa.emacs-china.org/melpa/")
@@ -396,3 +401,4 @@
 ;; M-x toggle-debug-on-error # 出现错误就会捕捉到*Backtrace*里面
 
 ;; muti cursor来头部选一列,然后删除: 就能代替replace-string 替换掉空行问题
+;; C-q C-j 加空行
