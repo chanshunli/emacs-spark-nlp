@@ -378,6 +378,7 @@
 (require 'jim-racket)
 (require 'jim-haskell)
 (require 'jim-dired)
+(require 'jim-datalog)
 
 (defun tabnine-require ()
   (interactive)
