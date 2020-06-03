@@ -34,7 +34,8 @@
 
 (defun dl/search ()
   "全文搜索内容命令, 填入参数去全文搜索
- 就像ls,grep命令一样透明"
+  就像ls,grep命令一样透明
+https://docs.datomic.com/on-prem/query.html"
   (interactive)
   ;; 返回是非字符串的结构体导致会失败message出来
   (->>
@@ -50,9 +51,10 @@
 ;; 做编辑器的主人,所有重复性的工作全部要被自动化掉,完全自我设计 <= `要做咏春拳学的主人`哲学思想能量转化
 ;; 1.需要反复重复的功能: 就用emacs来自定义化掉
 ;; 2.避免反复切换和打断,就直接一个命令就到达了 => 就像水一样切不断, 标月指 & Lisp机大脑流的速度
-;; 3. 将代码的重复和文档性的隐藏于无形的Emacs自我设计中 <= 武术的最高境界是将技术隐藏于无形,没有任何的预先动作,随时都能最快的攻防转换
+;; 3. 将代码的重复和文档性的(或者工具性的,测试性的,只能写在comment里面)隐藏于无形的Emacs自我设计中 <= 武术的最高境界是将技术隐藏于无形,没有任何的预先动作,随时都能最快的攻防转换
 (defun dl/entity ()
-  "根据eid(相当于SQL表格的主键),查出所有它的属性值出来"
+  "根据eid(相当于SQL表格的主键),查出所有它的属性值出来
+  https://stackoverflow.com/questions/14189647/get-all-fields-from-a-datomic-entity"
   (interactive)
   ;; 返回了list,需要str出来才能打印
   (let* ((code
