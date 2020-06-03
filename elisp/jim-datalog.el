@@ -27,31 +27,20 @@
    )
   )
 
-;; TODO: 改成cider-eval,填入参数去全文搜索
 (defun dl/search ()
-  "全文搜索内容"
-  (interactive)
-  (insert
-   "
-(d/q '[:find ?entity ?name ?tx ?score
-         :in $ ?search
-         :where [(fulltext $ :artist/name ?search) [[?entity ?name ?tx ?score]]]]
-    db \"zeppelin\")
-"
-   )
-  )
-
-(defun dl/search1 ()
-  "TODO: 全文搜索内容 命令"
+  "全文搜索内容命令, 填入参数去全文搜索
+ 就像ls,grep命令一样透明"
   (interactive)
   ;; 返回是非字符串的结构体导致会失败message出来
-  (eval-clj-code
-   "(d/q '[:find ?entity ?name ?tx ?score
+  (->>
+   (read-string "q:")
+   (format
+    "(str (d/q '[:find ?entity ?name ?tx ?score
          :in $ ?search
          :where [(fulltext $ :artist/name ?search) [[?entity ?name ?tx ?score]]]]
-    db \"zeppelin\")"
-   )
-  )
+    db \"%s\"))")
+   (eval-clj-code)
+   message))
 
 ;; 做编辑器的主人,所有重复性的工作全部要被自动化掉,完全自我设计 <= `要做咏春拳学的主人`哲学思想能量转化
 ;; 1.需要反复重复的功能: 就用emacs来自定义化掉
