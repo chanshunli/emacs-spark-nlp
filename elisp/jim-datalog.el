@@ -1,3 +1,13 @@
+(defun dl/init ()
+  "下面中的db和conn的变量都是来源这里"
+  (interactive)
+  (insert
+   "
+[datomic.api :as d]
+(d/create-database db-uri)
+(def conn (d/connect db-uri))
+(def db (d/db conn))
+"))
 
 ;; TODO: 用yasnipat来放多个参数来作为模板
 (defun dl/q ()
@@ -6,26 +16,21 @@
 (d/q '[:find
        :where ]
       db)
-")
-  )
+"))
 
 (defun dl/pull ()
   (interactive)
   (insert
    "
 (d/pull db '[*] eid)
-"
-   )
-  )
+"))
 
 (defun dl/pull1 ()
   (interactive)
   (insert
    "
 (d/pull db ' led-zeppelin)
-"
-   )
-  )
+"))
 
 (defun dl/search ()
   "全文搜索内容命令, 填入参数去全文搜索
