@@ -26,10 +26,18 @@
     (first number-list)))
 
 (defun alter-table-add-column-tpl (table column)
-  (format "ALTER TABLE `%s` ADD COLUMN `%s` VARCHAR(32);"
+  (format "ALTER TABLE %s ADD COLUMN %s TEXT;"
           table column))
 
 (defun alter-table-remove-column-tpl (table column)
+  (format "ALTER TABLE %s DROP COLUMN %s"
+          table column))
+
+(defun alter-table-add-column-tpl-mysql (table column)
+  (format "ALTER TABLE `%s` ADD COLUMN `%s` VARCHAR(32);"
+          table column))
+
+(defun alter-table-remove-column-tpl-mysql (table column)
   (format "ALTER TABLE `%s` DROP COLUMN `%s`"
           table column))
 
