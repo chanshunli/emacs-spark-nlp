@@ -45,15 +45,17 @@
 (defun generate-sql-files (table column)
   (let* ((file-name-fn
           (lambda (up-or-down)
-            (format "migrations/0%s-%s-%s-%s.%s.sql"
-                    ;; (vc-root-dir)
-                    (+  (get-last-sql-number) 1)
-                    table
-                    (cond ((string= up-or-down "add") "add")
-                          ((string= up-or-down "remove") "remove"))
-                    column
-                    (cond ((string= up-or-down "add") "up")
-                          ((string= up-or-down "remove") "down")))))
+            (format
+             ;; TODO: ragtime只能支持两位数 01,02,03 ... ,10,11
+             "migrations/%s-%s-%s-%s.%s.sql"
+             ;; (vc-root-dir)
+             (+  (get-last-sql-number) 1)
+             table
+             (cond ((string= up-or-down "add") "add")
+                   ((string= up-or-down "remove") "remove"))
+             column
+             (cond ((string= up-or-down "add") "up")
+                   ((string= up-or-down "remove") "down")))))
          (up-sql-file-name (funcall file-name-fn "add"))
          (down-sql-file-name (funcall file-name-fn "remove")))
     (list up-sql-file-name down-sql-file-name)))
