@@ -52,7 +52,8 @@
         web-mode
         intero
         haskell-mode
-        racket-mode))
+        racket-mode
+        org-roam))
 
 (package-initialize)
 
@@ -379,6 +380,7 @@
 (require 'jim-haskell)
 (require 'jim-dired)
 (require 'jim-datalog)
+(require 'jim-roam)
 
 (defun tabnine-require ()
   (interactive)
